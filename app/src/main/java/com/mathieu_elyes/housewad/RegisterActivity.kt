@@ -1,6 +1,5 @@
 package com.mathieu_elyes.housewad
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,11 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class MainActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_register)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -22,39 +21,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    public fun createUser(view: View)
+    public fun back(view: View)
     {
-        val intent = Intent(this, RegisterActivity::class.java);
-        startActivity(intent);
+        finish()
     }
 
-
-    public fun login(view: View) {
+    public fun register(view: View)
+    {
         val login = findViewById<EditText>(R.id.editUsername).text.toString()
         val password = findViewById<EditText>(R.id.editPassword).text.toString()
-        val dataToLogin = LoginOrRegisterData(login, password)
-        UserService().login(dataToLogin, ::loginSuccess)
+        val dataToRegister = LoginOrRegisterData(login, password)
+        UserService().register(dataToRegister, ::registerSuccess)
     }
 
-    private fun loginSuccess(responseCode: Int, tokenResponse: TokenResponse?)
+    private fun registerSuccess(responseCode: Int)
     {
-        val token = tokenResponse?.token
-        System.out.println("token: " + token.toString())
         if (responseCode == 200)
         {
-            val intent = Intent(this, MenuActivity::class.java);
-//          saveToken(token!!)
-            intent.putExtra("token", token.toString());
-            startActivity(intent);
+            finish()
         }
     }
-
-//    private fun saveToken(token: String)
-//    {
-//        val tokenStorage = tokenStorage(this)
-//        mainScope.launch {
-//            tokenStorage.write(token)
-//        }
-//    }
-
 }

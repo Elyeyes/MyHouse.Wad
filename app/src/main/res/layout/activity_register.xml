@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/after_noon"
-    tools:context=".MainActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
         android:id="@+id/textWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/helvetica"
-        android:text="Welcome"
+        android:text="Create account"
         android:textSize="55sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,14 +22,14 @@
         app:layout_constraintVertical_bias="0.109" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonRegister"
         android:layout_width="144dp"
         android:layout_height="50dp"
         android:layout_marginTop="66dp"
         android:backgroundTint="@color/primaryColor"
         android:fontFamily="@font/helvetica"
-        android:onClick="login"
-        android:text="Login"
+        android:onClick="register"
+        android:text="Register"
         android:textColorLink="@color/primaryColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textWelcome" />
 
     <Button
-        android:id="@+id/buttonCreateAccount"
+        android:id="@+id/buttonAlready"
         android:layout_width="113dp"
         android:layout_height="20dp"
         android:layout_marginTop="8dp"
@@ -75,16 +75,15 @@
         android:fontFamily="@font/helvetica"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:onClick="createUser"
+        android:onClick="back"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
-        android:text="pas de compte?"
+        android:text="Déjà un compte?"
         android:textColor="@color/secondaryColor"
         app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
-
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
 </androidx.constraintlayout.widget.ConstraintLayout>
