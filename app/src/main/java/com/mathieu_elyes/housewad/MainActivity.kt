@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         System.out.println("token: " + token.toString())
         if (responseCode == 200)
         {
-            val intent = Intent(this, MenuActivity::class.java);
+            val intent = Intent(this, NavigationActivity::class.java);
 //          saveToken(token!!)
             intent.putExtra("token", token.toString());
             startActivity(intent);

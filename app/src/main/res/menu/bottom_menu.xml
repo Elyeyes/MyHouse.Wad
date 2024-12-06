@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/rooms"
+        android:icon="@drawable/room"
+        android:title="Rooms" />
+    <item
+        android:id="@+id/modes"
+        android:title="Mode"
+        android:icon="@drawable/mode" />
+    <item
+        android:id="@+id/guest"
+        android:icon="@drawable/guest"
+        android:title="Guest" />
+</menu>
