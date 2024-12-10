@@ -44,13 +44,13 @@ class MainActivity : AppCompatActivity() {
     private fun loginSuccess(responseCode: Int, tokenResponse: TokenResponseData?)
     {
         val token = tokenResponse?.token
-        System.out.println("token: " + token.toString())
+        System.out.println("token.toString(): " + token.toString())
+        System.out.println("token: " + token)
         if (responseCode == 200)
         {
 //            val intent = Intent(this, NavigationActivity::class.java);
             val intent = Intent(this, HomeActivity::class.java);
             saveToken(token.toString()!!)
-            intent.putExtra("token", token.toString());
             startActivity(intent);
         }
     }
@@ -62,5 +62,4 @@ class MainActivity : AppCompatActivity() {
             tokenStorage.write(token)
         }
     }
-
 }

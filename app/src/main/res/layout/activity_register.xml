@@ -8,6 +8,18 @@
     android:background="@drawable/after_noon"
     tools:context=".RegisterActivity">
 
+    <ImageButton
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:background="#00FFFFFF"
+        android:onClick="back"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textWelcome"
         android:layout_width="wrap_content"

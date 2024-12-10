@@ -2,21 +2,31 @@ package com.mathieu_elyes.housewad
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.async
 
 class NavigationActivity : AppCompatActivity() {
-
+    private var token: String = ""
+    private var houseId: String = ""
+    private val mainScope = MainScope()
     @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
-//        val intent: Intent = getIntent()
-//        token = intent.getStringExtra("token").toString()
 
+        val houseIdStorage = HouseIdStorage(this)
+        val tokenStorage = TokenStorage(this);
+        mainScope.async {
+            token = tokenStorage.read() ?: ""
+            houseId = houseIdStorage.read() ?: ""
+            System.out.println("houseId=" + houseId + "tokendeHomeActivity=" + token)
+        }
         replaceFragment(MenuFragment())
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
@@ -30,17 +40,6 @@ class NavigationActivity : AppCompatActivity() {
             true
         }
     }
-
-
-//
-//    private fun test(){
-//        val buttonTest: Button = findViewById(R.id.buttonTest)
-//        buttonTest.setOnClickListener {
-//            replaceFragment(MenuFragment())
-//            true
-//        }
-//        System.out.println("ButtonTest" + "Button ID: ${buttonTest.id}, Text: ${buttonTest.text}")
-//    }
 
     public fun replaceFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
