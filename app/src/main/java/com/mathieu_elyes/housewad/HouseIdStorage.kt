@@ -14,9 +14,9 @@ class HouseIdStorage {
     constructor(context: Context){
         this.context = context
     }
-    suspend fun write(tokenToStore : String){
+    suspend fun write(houseIdStore : String){
         this.context.houseIdStore.edit { preferences ->
-            preferences[houseId] = tokenToStore
+            preferences[houseId] = houseIdStore
         }
     }
     suspend fun read(): String? {

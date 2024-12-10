@@ -34,6 +34,7 @@ class HomeActivity : AppCompatActivity() {
         val tokenStorage = TokenStorage(this);
         mainScope.async {
             token = tokenStorage.read() ?: ""
+            System.out.println("token dans Homeactivity=" + token)
 //            loadOrders()  //mettre le load des info (péripherique, maison, ou guest) ici
             loadHouses()
         }

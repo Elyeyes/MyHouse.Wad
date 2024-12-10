@@ -27,6 +27,7 @@ class NavigationActivity : AppCompatActivity() {
             houseId = houseIdStorage.read() ?: ""
             System.out.println("houseId=" + houseId + "tokendeHomeActivity=" + token)
         }
+
         replaceFragment(MenuFragment())
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
