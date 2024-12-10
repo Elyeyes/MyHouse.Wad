@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -28,14 +27,7 @@ class RoomsFragment : Fragment() {
     fun menu(view: View) {
         ButtonHelper().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        if (bottomNavigationView.menu.findItem(R.id.rooms).isVisible) {
-            bottomNavigationView.menu.findItem(R.id.rooms).isVisible = false
-            bottomNavigationView.menu.findItem(R.id.rooms_).isVisible = true
-        }
-        else{
-            bottomNavigationView.menu.findItem(R.id.rooms).isVisible = true
-            bottomNavigationView.menu.findItem(R.id.rooms_).isVisible = false
-        }
+        bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

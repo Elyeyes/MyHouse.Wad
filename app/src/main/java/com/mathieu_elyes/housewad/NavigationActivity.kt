@@ -24,17 +24,8 @@ class NavigationActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.rooms -> replaceFragment(RoomsFragment())
-                R.id.rooms_ -> replaceFragment(RoomsFragment())
                 R.id.modes -> replaceFragment(ModesFragment())
-                R.id.modesOrGuest_ -> {
-                    if (bottomNavigationView.menu.findItem(R.id.modesOrGuest_).title == "Guest"){
-                        replaceFragment(GuestFragment())
-                    } else {
-                        replaceFragment(ModesFragment())
-                    }
-                }
                 R.id.guest -> replaceFragment(GuestFragment())
-//                bottomNavigationView.menu.findItem(R.id.rooms).isVisible = false}
             }
             true
         }
