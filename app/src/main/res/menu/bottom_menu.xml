@@ -7,9 +7,19 @@
         android:icon="@drawable/room"
         android:title="Rooms" />
     <item
+        android:id="@+id/rooms_"
+        android:icon="@drawable/room"
+        android:title="Roomstest"
+        android:visible="false" />
+    <item
         android:id="@+id/modes"
-        android:title="Mode"
-        android:icon="@drawable/mode" />
+        android:icon="@drawable/mode"
+        android:title="Modes" />
+    <item
+        android:id="@+id/modesOrGuest_"
+        android:icon="@drawable/mode"
+        android:title="test"
+        android:visible="false" />
     <item
         android:id="@+id/guest"
         android:icon="@drawable/guest"
