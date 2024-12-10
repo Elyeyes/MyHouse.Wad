@@ -5,6 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/after_noon"
     tools:context=".HomeActivity">
 
+    <ListView
+        android:id="@+id/listHouses"
+        android:layout_width="373dp"
+        android:layout_height="614dp"
+        android:layout_marginTop="69dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

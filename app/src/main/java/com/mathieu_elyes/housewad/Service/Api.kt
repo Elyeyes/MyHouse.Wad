@@ -1,4 +1,4 @@
-package com.mathieu_elyes.housewad
+package com.mathieu_elyes.housewad.Service
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

@@ -2,15 +2,20 @@ package com.mathieu_elyes.housewad
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.mathieu_elyes.housewad.DataModel.LoginOrRegisterData
+import com.mathieu_elyes.housewad.DataModel.TokenResponseData
+import com.mathieu_elyes.housewad.Service.UserService
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    private val mainScope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,25 +41,26 @@ class MainActivity : AppCompatActivity() {
         UserService().login(dataToLogin, ::loginSuccess)
     }
 
-    private fun loginSuccess(responseCode: Int, tokenResponse: TokenResponse?)
+    private fun loginSuccess(responseCode: Int, tokenResponse: TokenResponseData?)
     {
         val token = tokenResponse?.token
         System.out.println("token: " + token.toString())
         if (responseCode == 200)
         {
-            val intent = Intent(this, NavigationActivity::class.java);
-//          saveToken(token!!)
+//            val intent = Intent(this, NavigationActivity::class.java);
+            val intent = Intent(this, HomeActivity::class.java);
+            saveToken(token.toString()!!)
             intent.putExtra("token", token.toString());
             startActivity(intent);
         }
     }
 
-//    private fun saveToken(token: String)
-//    {
-//        val tokenStorage = tokenStorage(this)
-//        mainScope.launch {
-//            tokenStorage.write(token)
-//        }
-//    }
+    private fun saveToken(token: String)
+    {
+        val tokenStorage = TokenStorage(this)
+        mainScope.launch {
+            tokenStorage.write(token)
+        }
+    }
 
 }

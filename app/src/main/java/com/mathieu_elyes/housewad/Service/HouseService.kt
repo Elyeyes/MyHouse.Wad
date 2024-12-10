@@ -1,4 +1,4 @@
-package com.mathieu_elyes.housewad
+package com.mathieu_elyes.housewad.Service
 
 class HouseService {
 //    public fun listHouses(dataToLogin: LoginOrRegisterData, onSuccess: (Int, TokenResponse?) -> Unit){

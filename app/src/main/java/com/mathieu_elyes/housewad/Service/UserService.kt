@@ -1,12 +1,11 @@
-package com.mathieu_elyes.housewad
+package com.mathieu_elyes.housewad.Service
 
-import android.content.Intent
-import android.view.View
-import android.widget.EditText
+import com.mathieu_elyes.housewad.DataModel.LoginOrRegisterData
+import com.mathieu_elyes.housewad.DataModel.TokenResponseData
 
 class UserService {
-    public fun login(dataToLogin: LoginOrRegisterData, onSuccess: (Int, TokenResponse?) -> Unit){
-        Api().post<LoginOrRegisterData, TokenResponse>(
+    public fun login(dataToLogin: LoginOrRegisterData, onSuccess: (Int, TokenResponseData?) -> Unit){
+        Api().post<LoginOrRegisterData, TokenResponseData>(
                 "https://polyhome.lesmoulinsdudev.com/api/users/auth", dataToLogin, onSuccess)
     }
 
