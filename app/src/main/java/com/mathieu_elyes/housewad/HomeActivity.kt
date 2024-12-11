@@ -63,4 +63,20 @@ class HomeActivity : AppCompatActivity() {
             houseAdapter.notifyDataSetChanged()
         }
     }
+
+    public fun disconnectUser(view: View)
+    {
+        finish()
+    }
+
+    public fun reload(view: View)
+    {
+        val tokenStorage = TokenStorage(this);
+        mainScope.async {
+            token = tokenStorage.read() ?: ""
+            System.out.println("token dans Homeactivity=" + token)
+//            loadOrders()  //mettre le load des info (péripherique, maison, ou guest) ici
+            loadHouses()
+        }
+    }
 }

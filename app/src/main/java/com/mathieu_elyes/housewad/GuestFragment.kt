@@ -18,13 +18,13 @@ class GuestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_guest, container, false)
-        view.findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
-            menu(it)
-        }
+//        view.findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
+//            menu(it)
+//        }
         return view
     }
 
-    fun menu(view: View) {
+    public fun menu(view: View) {
         ButtonHelper().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
