@@ -1,6 +1,5 @@
 package com.mathieu_elyes.housewad
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ListView
@@ -11,19 +10,18 @@ import androidx.core.view.WindowInsetsCompat
 import com.mathieu_elyes.housewad.Adapter.HouseAdapter
 import com.mathieu_elyes.housewad.DataModel.HouseData
 import com.mathieu_elyes.housewad.Service.Api
+import com.mathieu_elyes.housewad.Service.HouseService
+import com.mathieu_elyes.housewad.Storage.TokenStorage
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 
-class HomeActivity : AppCompatActivity() {
+class HousesActivity : AppCompatActivity() {
     private var houses: ArrayList<HouseData> = ArrayList()
     private lateinit var houseAdapter: HouseAdapter
-    // Pour récupérer le token il faut le mainScope
-    private var token: String = ""
-    private val mainScope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_houses)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -31,13 +29,7 @@ class HomeActivity : AppCompatActivity() {
         }
         houseAdapter = HouseAdapter(this, houses)
         initHousesList() //init la list avant le load des infos))
-        val tokenStorage = TokenStorage(this);
-        mainScope.async {
-            token = tokenStorage.read() ?: ""
-            System.out.println("token dans Homeactivity=" + token)
-//            loadOrders()  //mettre le load des info (péripherique, maison, ou guest) ici
-            loadHouses()
-        }
+        loadHouses()
     }
 
     private fun initHousesList(){
@@ -46,11 +38,10 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun loadHouses(){
-        Api().get<ArrayList<HouseData>>("https://polyhome.lesmoulinsdudev.com/api/houses", ::loadHousesSuccess, token)
+        HouseService(this).loadHouses(::loadHousesSuccess)
     }
 
     private fun loadHousesSuccess(responseCode: Int, loadedHouses: List<HouseData>?){
-        System.out.println(loadedHouses)
         if (responseCode == 200 && loadedHouses != null){
             houses.clear()
             houses.addAll(loadedHouses)
@@ -71,12 +62,6 @@ class HomeActivity : AppCompatActivity() {
 
     public fun reload(view: View)
     {
-        val tokenStorage = TokenStorage(this);
-        mainScope.async {
-            token = tokenStorage.read() ?: ""
-            System.out.println("token dans Homeactivity=" + token)
-//            loadOrders()  //mettre le load des info (péripherique, maison, ou guest) ici
-            loadHouses()
-        }
+        loadHouses()
     }
 }

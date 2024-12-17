@@ -18,9 +18,9 @@ class ModesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_modes, container, false)
-//        view.findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
-//            menu(it)
-//        }
+        view.findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
+            menu(it)
+        }
         return view
     }
 

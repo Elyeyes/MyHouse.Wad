@@ -2,12 +2,16 @@ package com.mathieu_elyes.housewad
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.ImageButton
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mathieu_elyes.housewad.Storage.HouseIdStorage
+import com.mathieu_elyes.housewad.Storage.TokenStorage
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 
@@ -19,15 +23,7 @@ class NavigationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
-
-        val houseIdStorage = HouseIdStorage(this)
-        val tokenStorage = TokenStorage(this);
-        mainScope.async {
-            token = tokenStorage.read() ?: ""
-            houseId = houseIdStorage.read() ?: ""
-            System.out.println("houseId=" + houseId + "tokendeHomeActivity=" + token)
-        }
-
+        //faire à la place getToken ou getHouseId dans la fonction dappel d'api
         replaceFragment(MenuFragment())
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)

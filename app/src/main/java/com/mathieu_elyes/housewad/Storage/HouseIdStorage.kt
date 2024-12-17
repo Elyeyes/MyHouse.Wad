@@ -1,4 +1,4 @@
-package com.mathieu_elyes.housewad
+package com.mathieu_elyes.housewad.Storage
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
@@ -21,6 +21,13 @@ class HouseIdStorage {
     }
     suspend fun read(): String? {
         val data = context.houseIdStore.data.firstOrNull()?.get(houseId).toString()
+        System.out.println("houseId read=" + houseId + "context "+ context)
         return data
+    }
+
+    suspend fun clear() {
+        this.context.houseIdStore.edit { preferences ->
+            preferences.clear()
+        }
     }
 }

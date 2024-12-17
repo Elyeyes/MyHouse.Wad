@@ -106,7 +106,7 @@ class Api {
         val reader = BufferedReader(InputStreamReader(connection.inputStream));
         val jsonData = reader.readText();
         System.out.println("BITE responseCode " + connection.responseCode)
-        System.out.println("BITE resoibseBody " + jsonData)
+        System.out.println("BITE responseBody " + jsonData)
         try {
             return parseJSON<T>(jsonData);
         }

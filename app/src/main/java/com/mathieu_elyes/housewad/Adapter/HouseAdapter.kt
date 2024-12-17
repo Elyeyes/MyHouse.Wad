@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.mathieu_elyes.housewad.DataModel.HouseData
-import com.mathieu_elyes.housewad.HouseIdStorage
+import com.mathieu_elyes.housewad.Storage.HouseIdStorage
 import com.mathieu_elyes.housewad.NavigationActivity
 import com.mathieu_elyes.housewad.R
-import com.mathieu_elyes.housewad.TokenStorage
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -19,12 +18,13 @@ class HouseAdapter(private val context: Context,
                    private val houses: ArrayList<HouseData>) : BaseAdapter() {
     private val mainScope = MainScope()
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
     override fun getItem(position: Int): Any {
-        System.out.println("test" + houses[position])
+        System.out.println("houses" + houses[position])
         return houses[position]
     }
 

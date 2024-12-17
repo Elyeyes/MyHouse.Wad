@@ -1,4 +1,4 @@
-package com.mathieu_elyes.housewad
+package com.mathieu_elyes.housewad.Storage
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
@@ -22,6 +22,13 @@ class TokenStorage {
     }
     suspend fun read(): String? {
         val data = context.tokenStore.data.firstOrNull()?.get(token).toString()
+        System.out.println("token read=" + data + "context "+ context)
         return data
+    }
+
+    suspend fun clear() {
+        this.context.tokenStore.edit { preferences ->
+            preferences.clear()
+        }
     }
 }

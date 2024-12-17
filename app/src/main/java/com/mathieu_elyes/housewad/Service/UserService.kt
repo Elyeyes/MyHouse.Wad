@@ -13,7 +13,7 @@ class UserService {
         Api().post<LoginOrRegisterData>("https://polyhome.lesmoulinsdudev.com/api/users/register", dataToRegister, onSuccess)
     }
 
-//    public fun getUsers({
-//        Api().get<ArrayList<Order>>(https://polyhome.lesmoulinsdudev.com/api/users)
+//    public fun getUsers(onSuccess: (Int, ArrayList<Guest>?) -> Unit){
+//        Api().get<ArrayList<Guest>>(https://polyhome.lesmoulinsdudev.com/api/users)
 //    })
 }

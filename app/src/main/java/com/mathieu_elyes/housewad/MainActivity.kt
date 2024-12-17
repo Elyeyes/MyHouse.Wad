@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.mathieu_elyes.housewad.DataModel.LoginOrRegisterData
 import com.mathieu_elyes.housewad.DataModel.TokenResponseData
 import com.mathieu_elyes.housewad.Service.UserService
+import com.mathieu_elyes.housewad.Storage.TokenStorage
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -18,13 +19,8 @@ class MainActivity : AppCompatActivity() {
     private val mainScope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
     }
 
     public fun createUser(view: View)
@@ -43,14 +39,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun loginSuccess(responseCode: Int, tokenResponse: TokenResponseData?)
     {
-        val token = tokenResponse?.token
-        System.out.println("token.toString(): " + token.toString())
-        System.out.println("token: " + token)
+        val token = tokenResponse?.token.toString()
         if (responseCode == 200)
         {
 //            val intent = Intent(this, NavigationActivity::class.java);
-            val intent = Intent(this, HomeActivity::class.java);
-            saveToken(token.toString()!!)
+            val intent = Intent(this, HousesActivity::class.java);
+            saveToken(token)
             startActivity(intent);
         }
     }
