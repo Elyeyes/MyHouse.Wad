@@ -11,22 +11,19 @@ import com.mathieu_elyes.housewad.Adapter.HouseAdapter
 import com.mathieu_elyes.housewad.DataModel.HouseData
 import com.mathieu_elyes.housewad.Service.Api
 import com.mathieu_elyes.housewad.Service.HouseService
+import com.mathieu_elyes.housewad.Service.UserService
 import com.mathieu_elyes.housewad.Storage.TokenStorage
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class HousesActivity : AppCompatActivity() {
+    private val mainScope = MainScope()
     private var houses: ArrayList<HouseData> = ArrayList()
     private lateinit var houseAdapter: HouseAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_houses)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
         houseAdapter = HouseAdapter(this, houses)
         initHousesList() //init la list avant le load des infos))
         loadHouses()
@@ -37,8 +34,10 @@ class HousesActivity : AppCompatActivity() {
         listView.adapter = houseAdapter
     }
 
-    private fun loadHouses(){
-        HouseService(this).loadHouses(::loadHousesSuccess)
+    private fun loadHouses() {
+        mainScope.launch {
+            HouseService(this@HousesActivity).loadHouses(::loadHousesSuccess)
+        }
     }
 
     private fun loadHousesSuccess(responseCode: Int, loadedHouses: List<HouseData>?){
@@ -57,6 +56,10 @@ class HousesActivity : AppCompatActivity() {
 
     public fun disconnectUser(view: View)
     {
+
+        mainScope.launch {
+            UserService(this@HousesActivity).logout()
+        }
         finish()
     }
 

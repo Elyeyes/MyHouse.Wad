@@ -26,7 +26,7 @@ class RegisterActivity : AppCompatActivity() {
         val login = findViewById<EditText>(R.id.editUsername).text.toString()
         val password = findViewById<EditText>(R.id.editPassword).text.toString()
         val dataToRegister = LoginOrRegisterData(login, password)
-        UserService().register(dataToRegister, ::registerSuccess)
+        UserService(this).register(dataToRegister, ::registerSuccess)
     }
 
     private fun registerSuccess(responseCode: Int)

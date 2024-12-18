@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GuestFragment">
+    tools:context=".GuestFragment"
+    android:background="@drawable/after_noon">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/outline_top"
@@ -40,8 +42,8 @@
             android:id="@+id/buttonAddGuest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:background="#00FFFFFF"
             android:src="@drawable/guest_add"
             app:layout_constraintStart_toEndOf="@+id/editGuestName"
@@ -49,11 +51,20 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    <TextView
+        android:id="@+id/textVerify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
     <ListView
         android:id="@+id/listGuests"
-        android:layout_width="0dp"
-        android:layout_height="614dp"
-        android:layout_marginTop="69dp"
+        android:layout_width="414dp"
+        android:layout_height="583dp"
+        android:layout_marginTop="90dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

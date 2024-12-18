@@ -8,8 +8,6 @@
     tools:context=".MenuFragment"
     android:background="@drawable/after_noon">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"

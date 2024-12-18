@@ -8,23 +8,15 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ListView
+import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mathieu_elyes.housewad.Adapter.GuestAdapter
 import com.mathieu_elyes.housewad.DataModel.GuestData
-import com.mathieu_elyes.housewad.DataModel.LoginOrRegisterData
-import com.mathieu_elyes.housewad.Service.Api
-import com.mathieu_elyes.housewad.Storage.HouseIdStorage
-import com.mathieu_elyes.housewad.Storage.TokenStorage
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
+import com.mathieu_elyes.housewad.Service.UserService
 
 class GuestFragment : Fragment() {
     private var guests: ArrayList<GuestData> = ArrayList()
     private lateinit var guestAdapter: GuestAdapter
-    // Pour récupérer le token il faut le mainScope
-    private var token: String = ""
-    private var houseId: String = "" // trouver le type de houseId
-    private val mainScope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -34,7 +26,7 @@ class GuestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_guest, container, false)
-//        setContentView(R.layout.fragment_guest)
+        var verify = view.findViewById<TextView>(R.id.textVerify)
 
 //        requireActivity(): Returns the Activity that the fragment is currently associated with. This is useful when you need to interact with the Activity itself or call methods that are specific to the Activity class.
 //        requireContext(): Returns the Context that the fragment is currently associated with. This is useful when you need a Context for operations like accessing resources, starting services, or creating views.
@@ -42,20 +34,20 @@ class GuestFragment : Fragment() {
 
         guestAdapter = GuestAdapter(requireContext(), guests)
         initGuestsList(view) //init la list avant le load des infos))
-        val tokenStorage = TokenStorage(requireContext());
-        val houseStorage = HouseIdStorage(requireContext());
-        mainScope.async {
-            token = tokenStorage.read() ?: ""
-            houseId = houseStorage.read() ?: ""
-            loadGuests() //mettre le load des info (péripherique, maison, ou guest) ici
-        }
+        loadGuests()
         view.findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
             menu(it)
         }
 
-//        view.findViewById<ImageButton>(R.id.buttonAddGuest).setOnClickListener {
-//            addGuests(it)
-//        }
+        view.findViewById<ImageButton>(R.id.buttonAddGuest).setOnClickListener {
+            var guestName = view.findViewById<EditText>(R.id.editGuestName)
+            if (guestName.text.toString() != "") {
+                addGuests(guestName.text.toString())
+                guestName.text.clear()
+            }else{
+                verify.text = "Please enter a name"
+            }
+        }
 
         return view
     }
@@ -66,16 +58,6 @@ class GuestFragment : Fragment() {
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
     }
 
-//    private fun addGuests(view: View){
-//        val guestName = view.findViewById<EditText>(R.id.editGuestName).text.toString()
-//        Api().post<String, String>("https://polyhome.lesmoulinsdudev.com/api/houses/$houseId/users", guestName, ::addGuestsSuccess, token)
-//    }
-
-    private fun addGuestSuccess(responseCode: Int){
-        if (responseCode == 200) {
-            loadGuests()
-        }
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
@@ -86,8 +68,8 @@ class GuestFragment : Fragment() {
     }
 
     private fun loadGuests(){
-        Api().get<ArrayList<GuestData>>("https://polyhome.lesmoulinsdudev.com/api/houses/$houseId/users", ::loadGuestsSuccess, token)
-    }
+        UserService(requireActivity()).loadGuest(::loadGuestsSuccess)
+        }
 
     private fun loadGuestsSuccess(responseCode: Int, loadedGuests: List<GuestData>?){
         System.out.println(loadedGuests)
@@ -95,6 +77,21 @@ class GuestFragment : Fragment() {
             guests.clear()
             guests.addAll(loadedGuests)
             updateGuestsList()
+        }
+    }
+
+    private fun addGuests(userLogin: String){
+        System.out.println("etape1 $userLogin")
+        UserService(requireActivity()).addGuest(userLogin, ::addGuestSuccess)
+    }
+
+    private fun addGuestSuccess(responseCode: Int){
+        System.out.println("etape2")
+        if (responseCode == 200) {
+            loadGuests()
+        }
+        else if(responseCode == 500){
+            System.out.println("Guest already exists or invalid name")
         }
     }
 

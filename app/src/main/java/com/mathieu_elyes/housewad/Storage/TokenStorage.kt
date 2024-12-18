@@ -9,25 +9,21 @@ import kotlinx.coroutines.flow.firstOrNull
 
 private val Context.tokenStore by preferencesDataStore(name = "token")
 
-class TokenStorage {
-    private lateinit var context : Context
-    private var token = stringPreferencesKey("token")
-    constructor(context: Context){
-        this.context = context
-    }
-    suspend fun write(tokenToStore : String){
-        this.context.tokenStore.edit { preferences ->
+class TokenStorage(private val context: Context) {
+    private val token = stringPreferencesKey("token")
+
+    suspend fun write(tokenToStore: String) {
+        context.tokenStore.edit { preferences ->
             preferences[token] = tokenToStore
         }
     }
+
     suspend fun read(): String? {
-        val data = context.tokenStore.data.firstOrNull()?.get(token).toString()
-        System.out.println("token read=" + data + "context "+ context)
-        return data
+        return context.tokenStore.data.firstOrNull()?.get(token)
     }
 
     suspend fun clear() {
-        this.context.tokenStore.edit { preferences ->
+        context.tokenStore.edit { preferences ->
             preferences.clear()
         }
     }

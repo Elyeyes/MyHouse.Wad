@@ -8,25 +8,21 @@ import kotlinx.coroutines.flow.firstOrNull
 
 private val Context.houseIdStore by preferencesDataStore(name = "houseId")
 
-class HouseIdStorage {
-    private lateinit var context : Context
-    private var houseId = stringPreferencesKey("houseId")
-    constructor(context: Context){
-        this.context = context
-    }
-    suspend fun write(houseIdStore : String){
-        this.context.houseIdStore.edit { preferences ->
+class HouseIdStorage(private val context: Context) {
+    private val houseId = stringPreferencesKey("houseId")
+
+    suspend fun write(houseIdStore: String) {
+        context.houseIdStore.edit { preferences ->
             preferences[houseId] = houseIdStore
         }
     }
+
     suspend fun read(): String? {
-        val data = context.houseIdStore.data.firstOrNull()?.get(houseId).toString()
-        System.out.println("houseId read=" + houseId + "context "+ context)
-        return data
+        return context.houseIdStore.data.firstOrNull()?.get(houseId)
     }
 
     suspend fun clear() {
-        this.context.houseIdStore.edit { preferences ->
+        context.houseIdStore.edit { preferences ->
             preferences.clear()
         }
     }

@@ -19,23 +19,13 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_menu, container, false)
+        view.findViewById<ImageButton>(R.id.buttonQuitHouse).setOnClickListener {
+            disconnectUser(it)
+        }
         return view
     }
 
     public fun disconnectUser(view: View) {
         requireActivity().finish()
     }
-
-//    public fun disconnectUser(view: View)
-//    {
-//        Try getActivity().finish() after calling popBackStackImmediate()
-//        val fragmentTransaction: FragmentTransaction =
-//            requireActivity().supportFragmentManager.beginTransaction()
-//        fragmentTransaction.replace(
-//            R.id.fragmentContainerView, fragment)
-////        fragmentTransaction.addToBackStack(null) // Permet de revenir au fragment précédent
-//        fragmentTransaction.commit()
-//        finish()
-//    }
-
 }

@@ -37,6 +37,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/reload" />
+
+        <TextView
+            android:id="@+id/textHouse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Houses"
+            app:layout_constraintEnd_toStartOf="@+id/buttonReload"
+            app:layout_constraintStart_toEndOf="@+id/buttonDisconnect"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

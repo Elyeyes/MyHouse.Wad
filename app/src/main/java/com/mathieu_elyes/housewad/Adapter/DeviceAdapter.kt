@@ -42,9 +42,9 @@ class DeviceAdapter(private val context: Context,
 
         val deviceSwitch = rowView.findViewById<Switch>(R.id.switchDevice)
 
+        val deviceButtonUp = rowView.findViewById<ImageButton>(R.id.ibuttonDeviceUp)
         val deviceStop = rowView.findViewById<Button>(R.id.buttonDeviceStop)
         val deviceButtonDown = rowView.findViewById<ImageButton>(R.id.ibuttonDeviceDown)
-        val deviceButtonUp = rowView.findViewById<ImageButton>(R.id.ibuttonDeviceUp)
 
         val deviceIcon = rowView.findViewById<ImageView>(R.id.imageDevice)
         deviceName.text = devices[position].id
@@ -70,11 +70,28 @@ class DeviceAdapter(private val context: Context,
             deviceIcon.setImageResource(R.drawable.garage)
         }
 
-        rowView.setOnClickListener {
+        deviceSwitch.setOnClickListener {
             val intent = Intent(context, NavigationActivity::class.java)
             saveDeviceId(devices[position].id)
             context.startActivity(intent)
         }
+
+        deviceButtonUp.setOnClickListener {
+            val intent = Intent(context, NavigationActivity::class.java)
+            saveDeviceId(devices[position].id)
+            context.startActivity(intent)
+        }
+        deviceStop.setOnClickListener {
+            val intent = Intent(context, NavigationActivity::class.java)
+            saveDeviceId(devices[position].id)
+            context.startActivity(intent)
+        }
+        deviceButtonDown.setOnClickListener {
+            val intent = Intent(context, NavigationActivity::class.java)
+            saveDeviceId(devices[position].id)
+            context.startActivity(intent)
+        }
+
         return rowView
     }
 

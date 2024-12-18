@@ -2,23 +2,21 @@ package com.mathieu_elyes.housewad
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.mathieu_elyes.housewad.Storage.HouseIdStorage
-import com.mathieu_elyes.housewad.Storage.TokenStorage
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
 
 class NavigationActivity : AppCompatActivity() {
     private var token: String = ""
     private var houseId: String = ""
     private val mainScope = MainScope()
+    private val handler = Handler(Looper.getMainLooper())
+    private var isNavigationEnabled = true
     @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +27,14 @@ class NavigationActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setBackground(null)
         bottomNavigationView.setOnItemSelectedListener { item ->
+            if (isNavigationEnabled) {
+                isNavigationEnabled = false
+                handler.postDelayed({ isNavigationEnabled = true }, 1000)
             when (item.itemId) {
-                R.id.rooms -> replaceFragment(RoomsFragment())
+                R.id.rooms -> replaceFragment(DevicesFragment())
                 R.id.modes -> replaceFragment(ModesFragment())
                 R.id.guest -> replaceFragment(GuestFragment())
+            }
             }
             true
         }

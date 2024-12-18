@@ -6,9 +6,9 @@
     app:startDestination="@id/roomsFragment">
     <fragment
         android:id="@+id/roomsFragment"
-        android:name="com.mathieu_elyes.housewad.RoomsFragment"
+        android:name="com.mathieu_elyes.housewad.DevicesFragment"
         android:label="fragment_rooms"
-        tools:layout="@layout/fragment_rooms" >
+        tools:layout="@layout/fragment_devices" >
         <action
             android:id="@+id/action_roomsFragment_to_menuFragment"
             app:destination="@id/menuFragment" />

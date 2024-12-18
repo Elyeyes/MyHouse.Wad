@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RoomsFragment">
+    tools:context=".DevicesFragment"
+    android:background="@drawable/after_noon">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,33 +20,44 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:background="#00FFFFFF"
-            android:onClick="menu"
             android:src="@drawable/back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editGuestName"
+        <TextView
+            android:id="@+id/textHouseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="6dp"
-            android:ems="10"
-            android:hint="Guest Name"
-            android:inputType="text"
+            android:layout_marginStart="92dp"
+            android:text="House: gerer dans code"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonBack"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/buttonAddGuest"
+            android:id="@+id/buttonReload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="7dp"
+            android:background="@color/transparent"
+            android:src="@drawable/reload"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textHouseName"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/buttonChangeDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:background="#00FFFFFF"
-            android:src="@drawable/guest_add"
-            app:layout_constraintStart_toEndOf="@+id/editGuestName"
+            android:layout_marginEnd="31dp"
+            android:background="@color/transparent"
+            android:src="@drawable/device"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

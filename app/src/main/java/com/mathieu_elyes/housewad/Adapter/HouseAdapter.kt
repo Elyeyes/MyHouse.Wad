@@ -36,7 +36,11 @@ class HouseAdapter(private val context: Context,
         val rowView = inflater.inflate(R.layout.list_item_houses, parent, false)
         val house = getItem(position) as HouseData
         val houseName = rowView.findViewById<TextView>(R.id.textHouseName)
-        houseName.text = "House:" + house.houseId.toString()
+        if (house.owner) {
+            houseName.text = "House:" + house.houseId.toString() + " Owner"
+        } else {
+            houseName.text = "House:" + house.houseId.toString() + " Guest"
+        }
         rowView.setOnClickListener {
             val intent = Intent(context, NavigationActivity::class.java)
             saveHouseId(house.houseId.toString())

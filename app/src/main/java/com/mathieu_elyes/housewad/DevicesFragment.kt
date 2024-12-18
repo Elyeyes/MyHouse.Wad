@@ -7,25 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ListView
+import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mathieu_elyes.housewad.Adapter.DeviceAdapter
-import com.mathieu_elyes.housewad.DataModel.DeviceData
 import com.mathieu_elyes.housewad.DataModel.DeviceListData
-import com.mathieu_elyes.housewad.Service.Api
-import com.mathieu_elyes.housewad.Storage.HouseIdStorage
-import com.mathieu_elyes.housewad.Storage.TokenStorage
+import com.mathieu_elyes.housewad.Service.DeviceService
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
-import org.json.JSONArray
-import org.json.JSONObject
+import kotlinx.coroutines.launch
 
-class RoomsFragment : Fragment() {
+class DevicesFragment : Fragment() {
     private var devices: DeviceListData = DeviceListData(ArrayList())
     private lateinit var deviceAdapter: DeviceAdapter
     private var test : Int =0
-    // Pour récupérer le token il faut le mainScope
-    private var token: String = ""
-    private var houseId: String = "" // trouver le type de houseId
     private val mainScope = MainScope()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +28,7 @@ class RoomsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_rooms, container, false)
+        val view = inflater.inflate(R.layout.fragment_devices, container, false)
 
 //        requireActivity(): Returns the Activity that the fragment is currently associated with. This is useful when you need to interact with the Activity itself or call methods that are specific to the Activity class.
 //        requireContext(): Returns the Context that the fragment is currently associated with. This is useful when you need a Context for operations like accessing resources, starting services, or creating views.
@@ -43,20 +36,18 @@ class RoomsFragment : Fragment() {
 
         deviceAdapter = DeviceAdapter(requireContext(), devices)
         initDeviceList(view) //init la list avant le load des infos))
-        val tokenStorage = TokenStorage(requireContext());
-        val houseStorage = HouseIdStorage(requireContext());
-        mainScope.async {
-            token = tokenStorage.read() ?: ""
-            houseId = houseStorage.read() ?: ""
-            loadDevices() //mettre le load des info (péripherique, maison, ou guest) ici
-        }
+        loadDevices()
         view.findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
-            menu(it)
+            menu()
+        }
+
+        view.findViewById<ImageButton>(R.id.buttonReload).setOnClickListener {
+            loadDevices()
         }
         return view
     }
 
-    public fun menu(view: View) {
+    public fun menu() {
         ButtonHelper().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
@@ -72,20 +63,28 @@ class RoomsFragment : Fragment() {
     }
 
     private fun loadDevices(){
-        Api().get<DeviceListData>("https://polyhome.lesmoulinsdudev.com/api/houses/$houseId/devices", ::loadDevicesSuccess, token)
+        mainScope.launch {
+            if (isAdded) {
+                DeviceService(requireActivity()).loadDevices(::loadDevicesSuccess)
+            }
+        }
     }
 
     private fun loadDevicesSuccess(responseCode: Int, responseBody: DeviceListData?) {
-        test +=1
-        System.out.println("Api + $test")
-        if (responseCode == 200 && responseBody != null) {
-            System.out.println(responseBody)
-            devices.clear()
-            for (device in responseBody.devices) {
-                devices.add(device)
-                System.out.println(device)
-            }
-            updateDevicesList()
+                val buttonReload = requireActivity().findViewById<ImageButton>(R.id.buttonReload)
+                if (responseCode == 200 && responseBody != null) {
+                    System.out.println("oui: " + responseBody)
+                    devices.clear()
+                    for (device in responseBody.devices) {
+                        devices.add(device)
+                        System.out.println("mes devices : " + device)
+                        buttonReload.visibility = View.GONE
+                    }
+                    updateDevicesList()
+                } else {
+                    val textHouseName = requireActivity().findViewById<TextView>(R.id.textHouseName)
+                    textHouseName.text = "Error, try reloading ->"
+                    buttonReload.visibility = View.VISIBLE
         }
     }
 
