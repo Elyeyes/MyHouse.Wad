@@ -60,13 +60,4 @@ class GuestAdapter(private val context: Context,
         }
         return rowView
     }
-
-
-//    private fun saveUserLogin(userLogin: String)
-//    {
-//        val guestIdStorage = GuestIdStorage(context)
-//        mainScope.launch {
-//            guestIdStorage.write(userLogin)
-//        }
-//    }
 }

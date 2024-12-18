@@ -2,7 +2,6 @@ package com.mathieu_elyes.housewad.Service
 
 import android.content.Context
 import com.mathieu_elyes.housewad.Storage.DeviceStorage
-import com.mathieu_elyes.housewad.Storage.GuestIdStorage
 import com.mathieu_elyes.housewad.Storage.HouseIdStorage
 import com.mathieu_elyes.housewad.Storage.TokenStorage
 import kotlinx.coroutines.runBlocking
@@ -23,9 +22,5 @@ abstract class BaseService(val context: Context) {
 
     protected fun getDeviceId(): String? {
         return runBlocking { DeviceStorage(context).read() }
-    }
-
-    protected fun getGuestId(): String? {
-        return runBlocking { GuestIdStorage(context).read() }
     }
 }

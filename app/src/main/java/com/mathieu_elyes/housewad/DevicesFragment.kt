@@ -18,8 +18,8 @@ import kotlinx.coroutines.launch
 class DevicesFragment : Fragment() {
     private var devices: DeviceListData = DeviceListData(ArrayList())
     private lateinit var deviceAdapter: DeviceAdapter
-    private var test : Int =0
     private val mainScope = MainScope()
+    var devicesDisplayed = "all"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -43,6 +43,9 @@ class DevicesFragment : Fragment() {
 
         view.findViewById<ImageButton>(R.id.buttonReload).setOnClickListener {
             loadDevices()
+        }
+        view.findViewById<ImageButton>(R.id.buttonChangeDisplay).setOnClickListener {
+            filterDevices()
         }
         return view
     }
@@ -71,20 +74,23 @@ class DevicesFragment : Fragment() {
     }
 
     private fun loadDevicesSuccess(responseCode: Int, responseBody: DeviceListData?) {
-                val buttonReload = requireActivity().findViewById<ImageButton>(R.id.buttonReload)
-                if (responseCode == 200 && responseBody != null) {
-                    System.out.println("oui: " + responseBody)
-                    devices.clear()
-                    for (device in responseBody.devices) {
-                        devices.add(device)
-                        System.out.println("mes devices : " + device)
-                        buttonReload.visibility = View.GONE
-                    }
-                    updateDevicesList()
-                } else {
-                    val textHouseName = requireActivity().findViewById<TextView>(R.id.textHouseName)
-                    textHouseName.text = "Error, try reloading ->"
-                    buttonReload.visibility = View.VISIBLE
+        val buttonReload = requireActivity().findViewById<ImageButton>(R.id.buttonReload)
+        if (responseCode == 200 && responseBody != null) {
+            devices.clear()
+            for (device in responseBody.devices) {
+                if (device.type == devicesDisplayed) {
+                    devices.add(device)
+                    buttonReload.visibility = View.GONE
+                }else if(devicesDisplayed == "all"){
+                    devices.add(device)
+                    buttonReload.visibility = View.GONE
+                }
+            }
+            updateDevicesList()
+        } else {
+            val textHouseName = requireActivity().findViewById<TextView>(R.id.textHouseName)
+            textHouseName.text = "Error, try reloading ->"
+            buttonReload.visibility = View.VISIBLE
         }
     }
 
@@ -94,5 +100,23 @@ class DevicesFragment : Fragment() {
                 deviceAdapter.notifyDataSetChanged()
             }
         }
+    }
+
+    private fun filterDevices() {
+        val buttonChangeDisplay = requireActivity().findViewById<ImageButton>(R.id.buttonChangeDisplay)
+        if (devicesDisplayed == "all") {
+            devicesDisplayed = "light"
+            buttonChangeDisplay.setImageResource(R.drawable.lightbulb)
+        } else if (devicesDisplayed == "light") {
+            devicesDisplayed = "rolling shutter"
+            buttonChangeDisplay.setImageResource(R.drawable.shutter)
+        } else if (devicesDisplayed == "rolling shutter") {
+            devicesDisplayed = "garage door"
+            buttonChangeDisplay.setImageResource(R.drawable.garage)
+        } else {
+            devicesDisplayed = "all"
+            buttonChangeDisplay.setImageResource(R.drawable.device)
+        }
+        loadDevices()
     }
 }
