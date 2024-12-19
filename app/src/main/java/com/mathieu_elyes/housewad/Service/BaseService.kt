@@ -20,7 +20,15 @@ abstract class BaseService(val context: Context) {
         return runBlocking { HouseIdStorage(context).read() }
     }
 
+    protected fun clearHouseId() {
+        runBlocking { HouseIdStorage(context).clear() }
+    }
+
     protected fun getDeviceId(): String? {
         return runBlocking { DeviceStorage(context).read() }
+    }
+
+    protected fun clearDeviceId() {
+        runBlocking { DeviceStorage(context).clear() }
     }
 }

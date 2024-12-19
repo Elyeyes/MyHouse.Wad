@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/after_noon"
+    tools:context=".DeviceActivity">
+
+    <TextView
+        android:id="@+id/textDeviceNameActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="66dp" />
+
+    <Switch
+        android:id="@+id/switchLightActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="531dp" />
+
+    <ImageButton
+        android:id="@+id/iButtonDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/down_arrow"
+        tools:layout_editor_absoluteX="305dp"
+        tools:layout_editor_absoluteY="316dp" />
+
+    <ImageButton
+        android:id="@+id/iButtonUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/up_arrow"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="316dp" />
+
+    <TextView
+        android:id="@+id/textPercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="184dp"
+        tools:layout_editor_absoluteY="325dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

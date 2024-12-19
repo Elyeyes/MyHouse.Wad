@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mathieu_elyes.housewad.Adapter.DeviceAdapter
 import com.mathieu_elyes.housewad.DataModel.DeviceListData
 import com.mathieu_elyes.housewad.Service.DeviceService
+import com.mathieu_elyes.housewad.Service.HouseService
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -20,6 +21,7 @@ class DevicesFragment : Fragment() {
     private lateinit var deviceAdapter: DeviceAdapter
     private val mainScope = MainScope()
     var devicesDisplayed = "all"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -33,14 +35,15 @@ class DevicesFragment : Fragment() {
 //        requireActivity(): Returns the Activity that the fragment is currently associated with. This is useful when you need to interact with the Activity itself or call methods that are specific to the Activity class.
 //        requireContext(): Returns the Context that the fragment is currently associated with. This is useful when you need a Context for operations like accessing resources, starting services, or creating views.
 //        In many cases, requireActivity() and requireContext() can be used interchangeably because an Activity is a subclass of Context. However, if you specifically need to interact with the Activity, you should use requireActivity(). If you only need a Context, requireContext() is more appropriate.
+        val textHouse = view.findViewById<TextView>(R.id.textHouseName)
+        textHouse.text = "Devices of House: ${HouseService(requireActivity()).getHouse()}"
 
-        deviceAdapter = DeviceAdapter(requireContext(), devices)
+        deviceAdapter = DeviceAdapter(requireContext(), devices, devicesDisplayed)
         initDeviceList(view) //init la list avant le load des infos))
         loadDevices()
         view.findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
             menu()
         }
-
         view.findViewById<ImageButton>(R.id.buttonReload).setOnClickListener {
             loadDevices()
         }
@@ -88,11 +91,22 @@ class DevicesFragment : Fragment() {
             }
             updateDevicesList()
         } else {
-            val textHouseName = requireActivity().findViewById<TextView>(R.id.textHouseName)
-            textHouseName.text = "Error, try reloading ->"
+            val textHouse = requireActivity().findViewById<TextView>(R.id.textHouseName)
+            textHouse.text = "Error, try reloading ->"
             buttonReload.visibility = View.VISIBLE
+//            errorLoadingHouse()
         }
     }
+//    private fun errorLoadingHouse() {
+//        if (isAdded) {
+//            requireActivity().runOnUiThread {
+//                AlertDialog.Builder(requireContext())
+//                    .setTitle("Error")
+//                    .setMessage("You need to load a house first")
+//                    .show()
+//            }
+//        }
+//    }
 
     private fun updateDevicesList() {
         if (isAdded) {
@@ -117,6 +131,6 @@ class DevicesFragment : Fragment() {
             devicesDisplayed = "all"
             buttonChangeDisplay.setImageResource(R.drawable.device)
         }
-        loadDevices()
+        deviceAdapter.updateDevicesDisplayed(devicesDisplayed)
     }
 }

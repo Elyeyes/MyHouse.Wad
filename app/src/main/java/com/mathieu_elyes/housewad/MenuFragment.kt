@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mathieu_elyes.housewad.Service.HouseService
 
 class MenuFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +25,7 @@ class MenuFragment : Fragment() {
     }
 
     public fun disconnectUser(view: View) {
+        HouseService(requireContext()).quitHouse()
         requireActivity().finish()
     }
 }

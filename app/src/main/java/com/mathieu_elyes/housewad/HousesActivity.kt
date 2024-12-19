@@ -56,7 +56,6 @@ class HousesActivity : AppCompatActivity() {
 
     public fun disconnectUser(view: View)
     {
-
         mainScope.launch {
             UserService(this@HousesActivity).logout()
         }

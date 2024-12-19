@@ -6,9 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ListView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mathieu_elyes.housewad.Adapter.GuestAdapter
+import com.mathieu_elyes.housewad.Adapter.ModeAdapter
+import com.mathieu_elyes.housewad.DataModel.GuestData
+import com.mathieu_elyes.housewad.DataModel.ModeData
+import com.mathieu_elyes.housewad.Service.UserService
 
 class ModesFragment : Fragment() {
+    private var modes: ArrayList<ModeData> = ArrayList()
+    private lateinit var modeAdapter: ModeAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -17,11 +25,18 @@ class ModesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_modes, container, false)
+        val view = inflater.inflate(R.layout.fragment_guest, container, false)
+        modeAdapter = ModeAdapter(requireContext(), modes)
+        initModesList(view) //init la list avant le load des infos))
+        loadModes()
         view.findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
             menu(it)
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     public fun menu(view: View) {
@@ -30,7 +45,14 @@ class ModesFragment : Fragment() {
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun initModesList(view: View){
+        val listView = view.findViewById<ListView>(R.id.listModes)
+        listView.adapter = modeAdapter
+    }
+
+    private fun loadModes(){
+        modes.clear()
+//        modes.add()
+        modeAdapter.notifyDataSetChanged()
     }
 }

@@ -1,6 +1,8 @@
 package com.mathieu_elyes.housewad.Adapter
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +21,10 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class DeviceAdapter(private val context: Context,
-                    private val devices: DeviceListData) : BaseAdapter() {
+                    private val devices: DeviceListData,
+                    private var devicesDisplayed: String) : BaseAdapter() {
     private val mainScope = MainScope()
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
@@ -49,7 +51,15 @@ class DeviceAdapter(private val context: Context,
         deviceName.text = devices[position].id
 
         if (devices[position].type == "rolling shutter"){
-            deviceStop.text = "${devices[position].opening}%"
+            if(devices[position].openingMode!=2){
+                if(devices[position].opening == 0.0 || devices[position].opening == 1.0){ // le shutter peut etre toujour entrain de "monter" mais au max donc egal à 0
+                    deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
+                }else{
+                    deviceStop.text = "STOP"
+                }
+            }else{
+                deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
+            }
             deviceStop.visibility = View.VISIBLE
             deviceButtonDown.visibility = View.VISIBLE
             deviceButtonUp.visibility = View.VISIBLE
@@ -62,7 +72,15 @@ class DeviceAdapter(private val context: Context,
             deviceName.setPadding(55 ,0,0,0)
         }
         else if (devices[position].type == "garage door"){
-            deviceStop.text = "${devices[position].opening}%"
+            if(devices[position].openingMode!=2){
+                if(devices[position].opening == 0.0 || devices[position].opening == 1.0){
+                    deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
+                }else{
+                    deviceStop.text = "STOP"
+                }
+            }else{
+                deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
+            }
             deviceStop.visibility = View.VISIBLE
             deviceButtonDown.visibility = View.VISIBLE
             deviceButtonUp.visibility = View.VISIBLE
@@ -70,14 +88,12 @@ class DeviceAdapter(private val context: Context,
         }
 
         deviceSwitch.setOnCheckedChangeListener { _, isChecked ->
-            System.out.println("switch cliqué ICI")
             if (isChecked) {
-                DeviceService(this.context).lightOn(devices[position].id, ::commandSuccess)
-//                notifyDataSetChanged()
-//                devices[position].power = 1
+                val commandData = CommandData("TURN ON")
+                DeviceService(this.context).command(devices[position].id, commandData, ::commandSuccess)
             } else {
-                DeviceService(this.context).lightOff(devices[position].id, ::commandSuccess)
-//                devices[position].power = 0
+                val commandData = CommandData("TURN OFF")
+                DeviceService(this.context).command(devices[position].id, commandData, ::commandSuccess)
             }
         }
 
@@ -90,17 +106,36 @@ class DeviceAdapter(private val context: Context,
             DeviceService(this.context).command(devices[position].id, commandData, ::commandSuccess)
         }
         deviceButtonDown.setOnClickListener {
-            System.out.println("DOWN")
             val commandData = CommandData("CLOSE")
             DeviceService(this.context).command(devices[position].id, commandData, ::commandSuccess)
-        }
+            }
         return rowView
     }
 
     private fun commandSuccess(responseCode: Int) {
         if (responseCode == 200) {
-            System.out.println("Command success")
+            mainScope.launch {
+                DeviceService(context).loadDevices() { responseCode, responseBody ->
+                    if (responseCode == 200) {
+                        devices.clear()
+                        for (device in responseBody!!.devices) {
+                            if (device.type == devicesDisplayed) {
+                                devices.add(device)
+                            }else if(devicesDisplayed == "all"){
+                                devices.add(device)
+                            }
+                        }
+                        Handler(Looper.getMainLooper()).post {
+                            notifyDataSetChanged()
+                        }
+                    }
+                }
+            }
         }
+    }
+    fun updateDevicesDisplayed(newDevicesDisplayed: String) {
+        devicesDisplayed = newDevicesDisplayed
+        commandSuccess(200)
     }
 
     private fun saveDeviceId(deviceId: String) {

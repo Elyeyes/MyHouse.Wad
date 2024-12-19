@@ -48,7 +48,6 @@ class GuestFragment : Fragment() {
                 verify.text = "Please enter a name"
             }
         }
-
         return view
     }
 

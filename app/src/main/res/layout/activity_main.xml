@@ -46,6 +46,7 @@
         android:hint="Password"
         android:inputType="text"
         android:text="a"
+        android:password="true"
         android:textColorHint="@color/primaryDARKColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"

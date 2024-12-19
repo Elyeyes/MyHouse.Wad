@@ -15,18 +15,20 @@
         android:theme="@style/Theme.HouseWad"
         tools:targetApi="31">
         <activity
-            android:name=".NavigationActivity"
-            android:screenOrientation="portrait"
+            android:name=".DeviceActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".NavigationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".HousesActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
