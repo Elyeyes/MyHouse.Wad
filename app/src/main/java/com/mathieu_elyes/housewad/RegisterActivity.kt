@@ -14,6 +14,12 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        applyBackground()
+    }
+
+    private fun applyBackground() {
+        val background = BackgroundPreference.getBackground(this)
+        window.decorView.setBackgroundResource(background)
     }
 
     public fun back(view: View)

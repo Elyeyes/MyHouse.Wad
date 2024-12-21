@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ListView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.mathieu_elyes.housewad.Adapter.GuestAdapter
 import com.mathieu_elyes.housewad.Adapter.ModeAdapter
-import com.mathieu_elyes.housewad.DataModel.GuestData
 import com.mathieu_elyes.housewad.DataModel.ModeData
-import com.mathieu_elyes.housewad.Service.UserService
 
 class ModesFragment : Fragment() {
     private var modes: ArrayList<ModeData> = ArrayList()
@@ -25,7 +22,7 @@ class ModesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_guest, container, false)
+        val view = inflater.inflate(R.layout.fragment_modes, container, false)
         modeAdapter = ModeAdapter(requireContext(), modes)
         initModesList(view) //init la list avant le load des infos))
         loadModes()

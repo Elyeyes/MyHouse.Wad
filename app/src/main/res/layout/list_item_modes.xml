@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -28,12 +27,13 @@
 
     <Button
         android:id="@+id/ButtonApply"
-        android:textSize="10sp"
         android:layout_width="80dp"
         android:layout_height="52dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
+        android:backgroundTint="?attr/colorPrimary"
         android:text="Apply"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="@+id/imageButtonRemove"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +43,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
-        android:background="#00FFFFFF"
+        android:background="@color/trans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/close" />

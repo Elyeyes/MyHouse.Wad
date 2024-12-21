@@ -24,9 +24,15 @@ class HousesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_houses)
+        applyBackground()
         houseAdapter = HouseAdapter(this, houses)
         initHousesList() //init la list avant le load des infos))
         loadHouses()
+    }
+
+    private fun applyBackground() {
+        val background = BackgroundPreference.getBackground(this)
+        window.decorView.setBackgroundResource(background)
     }
 
     private fun initHousesList(){

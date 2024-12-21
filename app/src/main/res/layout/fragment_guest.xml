@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GuestFragment"
-    android:background="@drawable/after_noon">
+    tools:context=".GuestFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -20,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:background="#00FFFFFF"
+            android:background="@color/trans"
             android:onClick="menu"
             android:src="@drawable/back"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:background="#00FFFFFF"
+            android:background="@color/trans"
             android:src="@drawable/guest_add"
             app:layout_constraintStart_toEndOf="@+id/editGuestName"
             app:layout_constraintTop_toTopOf="parent" />

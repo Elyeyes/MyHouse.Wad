@@ -77,6 +77,7 @@ class DevicesFragment : Fragment() {
     }
 
     private fun loadDevicesSuccess(responseCode: Int, responseBody: DeviceListData?) {
+        if (!isAdded) return
         val buttonReload = requireActivity().findViewById<ImageButton>(R.id.buttonReload)
         if (responseCode == 200 && responseBody != null) {
             devices.clear()

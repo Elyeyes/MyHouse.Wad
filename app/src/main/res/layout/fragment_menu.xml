@@ -5,10 +5,10 @@
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuFragment"
-    android:background="@drawable/after_noon">
+    tools:context=".MenuFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/outline_top"
@@ -20,22 +20,45 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:background="#00FFFFFF"
+            android:background="@color/trans"
             android:onClick="disconnectUser"
             android:src="@drawable/logout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="House nb of User"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/buttonNDMode"
+            app:layout_constraintStart_toEndOf="@+id/buttonQuitHouse"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/buttonNDMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:background="@color/trans"
+            android:src="@drawable/day"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-        android:layout_width="271dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="197dp"
-        android:fontFamily="@font/helvetica"
-        android:text="menu"
+    <Button
+        android:id="@+id/buttonShutdown"
+        android:layout_width="201dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="52dp"
+        android:text="Shutdown"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -71,7 +71,6 @@ class GuestFragment : Fragment() {
         }
 
     private fun loadGuestsSuccess(responseCode: Int, loadedGuests: List<GuestData>?){
-        System.out.println(loadedGuests)
         if (responseCode == 200 && loadedGuests != null){
             guests.clear()
             guests.addAll(loadedGuests)
@@ -80,12 +79,10 @@ class GuestFragment : Fragment() {
     }
 
     private fun addGuests(userLogin: String){
-        System.out.println("etape1 $userLogin")
         UserService(requireActivity()).addGuest(userLogin, ::addGuestSuccess)
     }
 
     private fun addGuestSuccess(responseCode: Int){
-        System.out.println("etape2")
         if (responseCode == 200) {
             loadGuests()
         }

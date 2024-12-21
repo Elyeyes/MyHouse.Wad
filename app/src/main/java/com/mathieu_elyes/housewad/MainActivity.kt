@@ -4,10 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.mathieu_elyes.housewad.DataModel.LoginOrRegisterData
 import com.mathieu_elyes.housewad.DataModel.TokenResponseData
 import com.mathieu_elyes.housewad.Service.UserService
@@ -17,10 +14,15 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val mainScope = MainScope()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        applyBackground()
+    }
+
+    private fun applyBackground() {
+        val background = BackgroundPreference.getBackground(this)
+        window.decorView.setBackgroundResource(background)
     }
 
     public fun createUser(view: View)

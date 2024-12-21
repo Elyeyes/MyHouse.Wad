@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/after_noon"
     tools:context=".HousesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:background="#00FFFFFF"
+            android:background="@color/trans"
             android:onClick="disconnectUser"
             android:src="@drawable/quit"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
-            android:background="#00FFFFFF"
+            android:background="@color/trans"
             android:onClick="reload"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

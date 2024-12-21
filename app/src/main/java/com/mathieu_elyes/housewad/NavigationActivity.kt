@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -17,14 +18,16 @@ class NavigationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
+//        val rootView: View = findViewById(android.R.id.content)
+//        rootView.setBackgroundResource(R.attr.background)
         replaceFragment(MenuFragment())
-
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setBackground(null)
+        bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
         bottomNavigationView.setOnItemSelectedListener { item ->
             if (isNavigationEnabled) {
+                handler.postDelayed({ isNavigationEnabled = true }, 500)
                 isNavigationEnabled = false
-                handler.postDelayed({ isNavigationEnabled = true }, 1000)
                 when (item.itemId) {
                     R.id.rooms -> replaceFragment(DevicesFragment())
                     R.id.modes -> replaceFragment(ModesFragment())
