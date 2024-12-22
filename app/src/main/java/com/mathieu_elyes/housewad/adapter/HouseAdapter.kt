@@ -1,4 +1,4 @@
-package com.mathieu_elyes.housewad.Adapter
+package com.mathieu_elyes.housewad.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.mathieu_elyes.housewad.DataModel.HouseData
-import com.mathieu_elyes.housewad.Storage.HouseIdStorage
+import com.mathieu_elyes.housewad.datamodel.HouseData
+import com.mathieu_elyes.housewad.storage.HouseIdStorage
 import com.mathieu_elyes.housewad.NavigationActivity
 import com.mathieu_elyes.housewad.R
 import kotlinx.coroutines.MainScope

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import com.mathieu_elyes.housewad.Adapter.HouseAdapter
-import com.mathieu_elyes.housewad.DataModel.HouseData
-import com.mathieu_elyes.housewad.Service.HouseService
-import com.mathieu_elyes.housewad.Service.UserService
+import com.mathieu_elyes.housewad.adapter.HouseAdapter
+import com.mathieu_elyes.housewad.datamodel.HouseData
+import com.mathieu_elyes.housewad.service.HouseService
+import com.mathieu_elyes.housewad.service.UserService
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -48,7 +48,7 @@ class HousesActivity : AppCompatActivity() {
         }
     }
 
-    public fun disconnectUser(view: View)
+    fun disconnectUser(view: View)
     {
         mainScope.launch {
             UserService(this@HousesActivity).logout()
@@ -56,7 +56,7 @@ class HousesActivity : AppCompatActivity() {
         finish()
     }
 
-    public fun reload(view: View)
+    fun reload(view: View)
     {
         loadHouses()
     }

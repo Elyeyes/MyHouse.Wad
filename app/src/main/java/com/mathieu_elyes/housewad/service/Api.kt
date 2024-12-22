@@ -1,4 +1,4 @@
-package com.mathieu_elyes.housewad.Service
+package com.mathieu_elyes.housewad.service
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -13,32 +13,32 @@ import java.net.URL
 class Api {
     public inline fun <reified T>get(path: String, crossinline onSuccess: (Int, T?) -> Unit, securityToken: String? = null)
     {
-        request<T, Unit>(path, "GET", onSuccess, null, securityToken);
+        request<T, Unit>(path, "GET", onSuccess, null, securityToken)
     }
 
     public inline fun <reified K, reified T>post(path: String, data: K, crossinline onSuccess: (Int, T?) -> Unit, securityToken: String? = null)
     {
-        request<T, K>(path, "POST", onSuccess, data, securityToken);
+        request<T, K>(path, "POST", onSuccess, data, securityToken)
     }
 
     public inline fun <reified K>post(path: String, data: K, crossinline onSuccess: (Int) -> Unit, securityToken: String? = null)
     {
-        request<K>(path, "POST", onSuccess, data, securityToken);
+        request<K>(path, "POST", onSuccess, data, securityToken)
     }
 
     public inline fun <reified K>put(path: String, data: K, crossinline onSuccess: (Int) -> Unit, securityToken: String? = null)
     {
-        request<K>(path, "PUT", onSuccess, data, securityToken);
+        request<K>(path, "PUT", onSuccess, data, securityToken)
     }
 
     public inline fun delete(path: String, crossinline onSuccess: (Int) -> Unit, securityToken: String? = null)
     {
-        request<Unit>(path, "DELETE", onSuccess, null, securityToken);
+        request<Unit>(path, "DELETE", onSuccess, null, securityToken)
     }
 
     public inline fun<reified K> delete(path: String, data: K, crossinline onSuccess: (Int) -> Unit, securityToken: String? = null)
     {
-        request<K>(path, "DELETE", onSuccess, data, securityToken);
+        request<K>(path, "DELETE", onSuccess, data, securityToken)
     }
 
     inline fun <reified T, reified K>request(
@@ -49,17 +49,17 @@ class Api {
         securityToken: String? = null)
     {
         CoroutineScope(Dispatchers.IO).launch {
-            val connection = prepareConnection<K>(path, method, data, securityToken);
-            val responseCode = connection.responseCode;
+            val connection = prepareConnection<K>(path, method, data, securityToken)
+            val responseCode = connection.responseCode
 
             if (responseCode == 200)
             {
-                onSuccess(responseCode, processData(connection));
+                onSuccess(responseCode, processData(connection))
             }
             else
             {
-                println(responseCode);
-                onSuccess(responseCode, null);
+                println(responseCode)
+                onSuccess(responseCode, null)
             }
         }
     }
@@ -72,61 +72,61 @@ class Api {
         securityToken: String? = null)
     {
         CoroutineScope(Dispatchers.IO).launch {
-            val connection = prepareConnection<K>(path, method, data, securityToken);
-            val responseCode = connection.responseCode;
+            val connection = prepareConnection<K>(path, method, data, securityToken)
+            val responseCode = connection.responseCode
 
-            onSuccess(responseCode);
+            onSuccess(responseCode)
         }
     }
 
     inline fun <reified K> prepareConnection(path: String, method: String, data: K? = null, securityToken: String? = null): HttpURLConnection
     {
-        val url = URL(path);
-        val connection = url.openConnection() as HttpURLConnection;
-        connection.requestMethod = method;
-        connection.setRequestProperty("Content-Type", "application/json");
+        val url = URL(path)
+        val connection = url.openConnection() as HttpURLConnection
+        connection.requestMethod = method
+        connection.setRequestProperty("Content-Type", "application/json")
 
         if(securityToken != null)
-            connection.setRequestProperty("Authorization", "Bearer $securityToken");
+            connection.setRequestProperty("Authorization", "Bearer $securityToken")
 
         if(data != null)
         {
-            val json = toJSON<K>(data);
+            val json = toJSON<K>(data)
 
-            val outputInBytes = json.toByteArray();
-            connection.outputStream.write(outputInBytes);
-            connection.outputStream.close();
+            val outputInBytes = json.toByteArray()
+            connection.outputStream.write(outputInBytes)
+            connection.outputStream.close()
         }
 
-        return connection;
+        return connection
     }
 
     inline fun <reified T> processData(connection: HttpURLConnection): T?
     {
-        val reader = BufferedReader(InputStreamReader(connection.inputStream));
-        val jsonData = reader.readText();
-        System.out.println("Debug responseCode " + connection.responseCode)
-        System.out.println("Debug responseBody " + jsonData)
+        val reader = BufferedReader(InputStreamReader(connection.inputStream))
+        val jsonData = reader.readText()
+        System.out.println("Debug responseCode ${connection.responseCode}")
+        System.out.println("Debug responseBody $jsonData")
         try {
-            return parseJSON<T>(jsonData);
+            return parseJSON<T>(jsonData)
         }
         catch(e: Exception)
         {
 
-            System.out.println("Debug error parsing JSON " + e)
+            System.out.println("Debug error parsing JSON $e")
             return null
         }
     }
 
     inline fun <reified T>parseJSON(jsonData: String): T
     {
-        val typeToken = object: TypeToken<T>() {} .type;
-        return Gson().fromJson(jsonData, typeToken);
+        val typeToken = object: TypeToken<T>() {} .type
+        return Gson().fromJson(jsonData, typeToken)
     }
 
     inline fun <reified K>toJSON(data: K): String
     {
-        val typeToken = object: TypeToken<K>() {} .type;
-        return Gson().toJson(data, typeToken);
+        val typeToken = object: TypeToken<K>() {} .type
+        return Gson().toJson(data, typeToken)
     }
 }

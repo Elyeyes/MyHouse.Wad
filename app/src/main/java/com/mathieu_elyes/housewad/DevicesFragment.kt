@@ -9,11 +9,11 @@ import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.mathieu_elyes.housewad.Adapter.DeviceAdapter
-import com.mathieu_elyes.housewad.DataModel.DeviceListData
-import com.mathieu_elyes.housewad.Service.DeviceService
-import com.mathieu_elyes.housewad.Service.FragmentService
-import com.mathieu_elyes.housewad.Service.HouseService
+import com.mathieu_elyes.housewad.adapter.DeviceAdapter
+import com.mathieu_elyes.housewad.datamodel.DeviceListData
+import com.mathieu_elyes.housewad.service.DeviceService
+import com.mathieu_elyes.housewad.service.FragmentService
+import com.mathieu_elyes.housewad.service.HouseService
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -21,11 +21,11 @@ class DevicesFragment : Fragment() {
     private var devices: DeviceListData = DeviceListData(ArrayList())
     private lateinit var deviceAdapter: DeviceAdapter
     private val mainScope = MainScope()
-    var devicesDisplayed = "all"
+    private var devicesDisplayed = "all"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,15 +54,15 @@ class DevicesFragment : Fragment() {
         return view
     }
 
-    public fun menu() {
+    private fun menu() {
         FragmentService().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//    }
 
     private fun initDeviceList(view: View){
         val listView = view.findViewById<ListView>(R.id.listDevices)
@@ -120,18 +120,23 @@ class DevicesFragment : Fragment() {
 
     private fun filterDevices() {
         val buttonChangeDisplay = requireActivity().findViewById<ImageButton>(R.id.buttonChangeDisplay)
-        if (devicesDisplayed == "all") {
-            devicesDisplayed = "light"
-            buttonChangeDisplay.setImageResource(R.drawable.lightbulb)
-        } else if (devicesDisplayed == "light") {
-            devicesDisplayed = "rolling shutter"
-            buttonChangeDisplay.setImageResource(R.drawable.shutter)
-        } else if (devicesDisplayed == "rolling shutter") {
-            devicesDisplayed = "garage door"
-            buttonChangeDisplay.setImageResource(R.drawable.garage)
-        } else {
-            devicesDisplayed = "all"
-            buttonChangeDisplay.setImageResource(R.drawable.device)
+        when (devicesDisplayed){
+            "all" -> {
+                devicesDisplayed = "light"
+                buttonChangeDisplay.setImageResource(R.drawable.lightbulb)
+            }
+            "light" -> {
+                devicesDisplayed = "rolling shutter"
+                buttonChangeDisplay.setImageResource(R.drawable.shutter)
+            }
+            "rolling shutter" -> {
+                devicesDisplayed = "garage door"
+                buttonChangeDisplay.setImageResource(R.drawable.garage)
+            }
+            else -> {
+                devicesDisplayed = "all"
+                buttonChangeDisplay.setImageResource(R.drawable.device)
+            }
         }
         deviceAdapter.updateDevicesDisplayed(devicesDisplayed)
     }

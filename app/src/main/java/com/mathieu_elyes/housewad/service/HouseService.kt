@@ -1,7 +1,7 @@
-package com.mathieu_elyes.housewad.Service
+package com.mathieu_elyes.housewad.service
 
 import android.content.Context
-import com.mathieu_elyes.housewad.DataModel.HouseData
+import com.mathieu_elyes.housewad.datamodel.HouseData
 
 class HouseService(context: Context): BaseService(context) {
     fun loadHouses(onSuccess: (Int, ArrayList<HouseData>?) -> Unit){

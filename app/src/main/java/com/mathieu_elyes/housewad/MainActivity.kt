@@ -6,10 +6,10 @@ import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.mathieu_elyes.housewad.DataModel.LoginOrRegisterData
-import com.mathieu_elyes.housewad.DataModel.TokenResponseData
-import com.mathieu_elyes.housewad.Service.UserService
-import com.mathieu_elyes.housewad.Storage.TokenStorage
+import com.mathieu_elyes.housewad.datamodel.LoginOrRegisterData
+import com.mathieu_elyes.housewad.datamodel.TokenResponseData
+import com.mathieu_elyes.housewad.service.UserService
+import com.mathieu_elyes.housewad.storage.TokenStorage
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -27,13 +27,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    public fun createUser(view: View)
+    fun createUser(view: View)
     {
-        val intent = Intent(this, RegisterActivity::class.java);
-        startActivity(intent);
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
-    public fun login(view: View) {
+    fun login(view: View) {
         val login = findViewById<EditText>(R.id.editUsername).text.toString()
         val password = findViewById<EditText>(R.id.editPassword).text.toString()
         val dataToLogin = LoginOrRegisterData(login, password)
@@ -47,8 +47,8 @@ class MainActivity : AppCompatActivity() {
         {
             mainScope.launch {
                 saveToken(token)
-                val intent = Intent(this@MainActivity, HousesActivity::class.java);
-                startActivity(intent);
+                val intent = Intent(this@MainActivity, HousesActivity::class.java)
+                startActivity(intent)
             }
         }
     }

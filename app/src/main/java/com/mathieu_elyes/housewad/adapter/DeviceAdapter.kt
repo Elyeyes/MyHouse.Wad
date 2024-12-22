@@ -1,4 +1,4 @@
-package com.mathieu_elyes.housewad.Adapter
+package com.mathieu_elyes.housewad.adapter
 
 import android.content.Context
 import android.os.Handler
@@ -12,11 +12,11 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
-import com.mathieu_elyes.housewad.DataModel.CommandData
-import com.mathieu_elyes.housewad.DataModel.DeviceListData
-import com.mathieu_elyes.housewad.Storage.DeviceStorage
+import com.mathieu_elyes.housewad.datamodel.CommandData
+import com.mathieu_elyes.housewad.datamodel.DeviceListData
+import com.mathieu_elyes.housewad.storage.DeviceStorage
 import com.mathieu_elyes.housewad.R
-import com.mathieu_elyes.housewad.Service.DeviceService
+import com.mathieu_elyes.housewad.service.DeviceService
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -49,42 +49,41 @@ class DeviceAdapter(private val context: Context,
 
         val deviceIcon = rowView.findViewById<ImageView>(R.id.imageDevice)
         deviceName.text = devices[position].id
+        when (devices[position].type) {
+            "rolling shutter" -> {
+                if(devices[position].openingMode!=2){
+                    if(devices[position].opening == 0.0 || devices[position].opening == 1.0){ // le shutter peut etre toujour entrain de "monter" mais au max donc egal à 0
+                        deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
+                    }else{
+                        deviceStop.text = context.getString(R.string.Stop)
+                    }
+                }else{
+                    deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
+                }
+                deviceIcon.setImageResource(R.drawable.shutter)
+            }
 
-        if (devices[position].type == "rolling shutter"){
-            if(devices[position].openingMode!=2){
-                if(devices[position].opening == 0.0 || devices[position].opening == 1.0){ // le shutter peut etre toujour entrain de "monter" mais au max donc egal à 0
-                    deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
+            "garage door" -> {
+                if(devices[position].openingMode!=2){
+                    if(devices[position].opening == 0.0 || devices[position].opening == 1.0){
+                        deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
+                    }else{
+                        deviceStop.text = context.getString(R.string.Stop)
+                    }
                 }else{
-                    deviceStop.text = context.getString(R.string.Stop)
-                }
-            }else{
-                deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
-            }
-            deviceStop.visibility = View.VISIBLE
-            deviceButtonDown.visibility = View.VISIBLE
-            deviceButtonUp.visibility = View.VISIBLE
-            deviceIcon.setImageResource(R.drawable.shutter)
-        }
-        else if (devices[position].type == "light") {
-            deviceSwitch.visibility = View.VISIBLE
-            deviceSwitch.isChecked = devices[position].power!! > 0
-            deviceIcon.setImageResource(R.drawable.lightbulb)
-            deviceName.setPadding(55 ,0,0,0)
-        }
-        else if (devices[position].type == "garage door"){
-            if(devices[position].openingMode!=2){
-                if(devices[position].opening == 0.0 || devices[position].opening == 1.0){
                     deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
-                }else{
-                    deviceStop.text = context.getString(R.string.Stop)
                 }
-            }else{
-                deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
+                deviceIcon.setImageResource(R.drawable.garage)
             }
-            deviceStop.visibility = View.VISIBLE
-            deviceButtonDown.visibility = View.VISIBLE
-            deviceButtonUp.visibility = View.VISIBLE
-            deviceIcon.setImageResource(R.drawable.garage)
+            "light" -> {
+                deviceSwitch.visibility = View.VISIBLE
+                deviceStop.visibility = View.GONE
+                deviceButtonDown.visibility = View.GONE
+                deviceButtonUp.visibility = View.GONE
+                deviceSwitch.isChecked = devices[position].power!! > 0
+                deviceIcon.setImageResource(R.drawable.lightbulb)
+                deviceName.setPadding(55 ,0,0,0)
+            }
         }
 
         deviceSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -115,7 +114,7 @@ class DeviceAdapter(private val context: Context,
     private fun commandSuccess(responseCode: Int) {
         if (responseCode == 200) {
             mainScope.launch {
-                DeviceService(context).loadDevices() { responseCode, responseBody ->
+                DeviceService(context).loadDevices { responseCode, responseBody ->
                     if (responseCode == 200) {
                         devices.clear()
                         for (device in responseBody!!.devices) {
@@ -133,6 +132,7 @@ class DeviceAdapter(private val context: Context,
             }
         }
     }
+
     fun updateDevicesDisplayed(newDevicesDisplayed: String) {
         devicesDisplayed = newDevicesDisplayed
         commandSuccess(200)

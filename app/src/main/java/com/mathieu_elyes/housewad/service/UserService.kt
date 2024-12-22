@@ -1,10 +1,10 @@
-package com.mathieu_elyes.housewad.Service
+package com.mathieu_elyes.housewad.service
 
 import android.content.Context
-import com.mathieu_elyes.housewad.DataModel.GuestData
-import com.mathieu_elyes.housewad.DataModel.LoginOrRegisterData
-import com.mathieu_elyes.housewad.DataModel.TokenResponseData
-import com.mathieu_elyes.housewad.DataModel.UserData
+import com.mathieu_elyes.housewad.datamodel.GuestData
+import com.mathieu_elyes.housewad.datamodel.LoginOrRegisterData
+import com.mathieu_elyes.housewad.datamodel.TokenResponseData
+import com.mathieu_elyes.housewad.datamodel.UserData
 
 class UserService(context: Context): BaseService(context) {
     fun login(dataToLogin: LoginOrRegisterData, onSuccess: (Int, TokenResponseData?) -> Unit){

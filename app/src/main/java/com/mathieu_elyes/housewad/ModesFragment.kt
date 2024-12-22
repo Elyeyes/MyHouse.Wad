@@ -8,16 +8,16 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ListView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.mathieu_elyes.housewad.Adapter.ModeAdapter
-import com.mathieu_elyes.housewad.DataModel.ModeData
-import com.mathieu_elyes.housewad.Service.FragmentService
+import com.mathieu_elyes.housewad.adapter.ModeAdapter
+import com.mathieu_elyes.housewad.datamodel.ModeData
+import com.mathieu_elyes.housewad.service.FragmentService
 
 class ModesFragment : Fragment() {
     private var modes: ArrayList<ModeData> = ArrayList()
     private lateinit var modeAdapter: ModeAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,16 +28,16 @@ class ModesFragment : Fragment() {
         initModesList(view) //init la list avant le load des infos))
         loadModes()
         view.findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
-            menu(it)
+            menu()
         }
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//    }
 
-    public fun menu(view: View) {
+    private fun menu() {
         FragmentService().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)

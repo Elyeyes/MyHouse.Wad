@@ -1,4 +1,4 @@
-package com.mathieu_elyes.housewad.Storage
+package com.mathieu_elyes.housewad.storage
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit

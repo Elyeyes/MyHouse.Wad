@@ -1,4 +1,4 @@
-package com.mathieu_elyes.housewad.Adapter
+package com.mathieu_elyes.housewad.adapter
 
 import android.app.Activity
 import android.content.Context
@@ -9,7 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import com.mathieu_elyes.housewad.DataModel.ModeData
+import com.mathieu_elyes.housewad.datamodel.ModeData
 import com.mathieu_elyes.housewad.R
 
 class ModeAdapter(private val context: Context,

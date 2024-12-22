@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.mathieu_elyes.housewad.DataModel.LoginOrRegisterData
-import com.mathieu_elyes.housewad.Service.UserService
+import com.mathieu_elyes.housewad.datamodel.LoginOrRegisterData
+import com.mathieu_elyes.housewad.service.UserService
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

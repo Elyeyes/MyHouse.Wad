@@ -1,4 +1,4 @@
-package com.mathieu_elyes.housewad.Adapter
+package com.mathieu_elyes.housewad.adapter
 
 import android.app.Activity
 import android.content.Context
@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.TextView
-import com.mathieu_elyes.housewad.DataModel.GuestData
+import com.mathieu_elyes.housewad.datamodel.GuestData
 import com.mathieu_elyes.housewad.R
-import com.mathieu_elyes.housewad.Service.UserService
+import com.mathieu_elyes.housewad.service.UserService
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 

@@ -1,8 +1,8 @@
-package com.mathieu_elyes.housewad.Service
+package com.mathieu_elyes.housewad.service
 
 import android.content.Context
-import com.mathieu_elyes.housewad.DataModel.CommandData
-import com.mathieu_elyes.housewad.DataModel.DeviceListData
+import com.mathieu_elyes.housewad.datamodel.CommandData
+import com.mathieu_elyes.housewad.datamodel.DeviceListData
 
 class DeviceService(context: Context): BaseService(context) {
     fun loadDevices(onSuccess: (Int, DeviceListData?) -> Unit) {

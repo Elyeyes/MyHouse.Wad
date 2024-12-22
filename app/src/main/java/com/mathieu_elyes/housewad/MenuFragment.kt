@@ -14,23 +14,23 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
-import com.mathieu_elyes.housewad.DataModel.CommandData
-import com.mathieu_elyes.housewad.DataModel.DeviceListData
-import com.mathieu_elyes.housewad.Service.DeviceService
-import com.mathieu_elyes.housewad.Service.HouseService
+import com.mathieu_elyes.housewad.datamodel.CommandData
+import com.mathieu_elyes.housewad.datamodel.DeviceListData
+import com.mathieu_elyes.housewad.service.DeviceService
+import com.mathieu_elyes.housewad.service.HouseService
 
 class MenuFragment : Fragment() {
     private val devices: DeviceListData = DeviceListData(ArrayList())
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_menu, container, false)
-        SetSpinner(view)
+        setSpinner(view)
 
         val textWelcome = view.findViewById<TextView>(R.id.textWelcome)
         textWelcome.text = getString(R.string.House) + ": " + HouseService(requireContext()).getHouse()
@@ -65,8 +65,8 @@ class MenuFragment : Fragment() {
         requireActivity().recreate()
     }
 
-    public fun shutdown(view: View) {
-        DeviceService(requireActivity()).loadDevices() { responseCode, responseBody ->
+    private fun shutdown(view: View) {
+        DeviceService(requireActivity()).loadDevices { responseCode, responseBody ->
             if (responseCode == 200) {
                 devices.clear()
                 for (device in responseBody!!.devices) {
@@ -90,7 +90,7 @@ class MenuFragment : Fragment() {
         }
     }
 
-    public fun SetSpinner(view: View) {
+    private fun setSpinner(view: View) {
         val languages = arrayOf(getString(R.string.selectLanguage), getString(R.string.English), getString(R.string.French))
         val spinner = view.findViewById<Spinner>(R.id.spinnerLanguage)
         val adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, languages)
@@ -115,7 +115,7 @@ class MenuFragment : Fragment() {
         }
     }
 
-    public fun disconnectUser(view: View) {
+    private fun disconnectUser(view: View) {
         HouseService(requireContext()).quitHouse()
         requireActivity().finish()
     }

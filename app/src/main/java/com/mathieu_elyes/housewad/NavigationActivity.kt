@@ -1,6 +1,6 @@
 package com.mathieu_elyes.housewad
 
-import android.annotation.SuppressLint
+//import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -36,20 +36,11 @@ class NavigationActivity : AppCompatActivity() {
         }
     }
 
-    public fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainerView, fragment, "${fragment.javaClass.simpleName}")
+        fragmentTransaction.replace(R.id.fragmentContainerView, fragment, fragment.javaClass.simpleName)
 //        fragmentTransaction.addToBackStack(null) // Permet de revenir au fragment précédent
         fragmentTransaction.commit()
     }
-
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack() // Revient au fragment précédent
-        } else {
-            super.onBackPressed() // Quitte l'activité
-        }
-    }
-
 }

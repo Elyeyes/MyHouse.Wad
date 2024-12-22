@@ -1,9 +1,9 @@
-package com.mathieu_elyes.housewad.Service
+package com.mathieu_elyes.housewad.service
 
 import android.content.Context
-import com.mathieu_elyes.housewad.Storage.DeviceStorage
-import com.mathieu_elyes.housewad.Storage.HouseIdStorage
-import com.mathieu_elyes.housewad.Storage.TokenStorage
+import com.mathieu_elyes.housewad.storage.DeviceStorage
+import com.mathieu_elyes.housewad.storage.HouseIdStorage
+import com.mathieu_elyes.housewad.storage.TokenStorage
 import kotlinx.coroutines.runBlocking
 
 abstract class BaseService(val context: Context) {

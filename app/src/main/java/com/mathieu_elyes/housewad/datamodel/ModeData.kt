@@ -1,4 +1,4 @@
-package com.mathieu_elyes.housewad.DataModel
+package com.mathieu_elyes.housewad.datamodel
 
 data class ModeData(
     val id: Int,

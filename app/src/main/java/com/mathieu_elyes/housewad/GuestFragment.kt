@@ -10,24 +10,24 @@ import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.mathieu_elyes.housewad.Adapter.GuestAdapter
-import com.mathieu_elyes.housewad.DataModel.GuestData
-import com.mathieu_elyes.housewad.Service.FragmentService
-import com.mathieu_elyes.housewad.Service.UserService
+import com.mathieu_elyes.housewad.adapter.GuestAdapter
+import com.mathieu_elyes.housewad.datamodel.GuestData
+import com.mathieu_elyes.housewad.service.FragmentService
+import com.mathieu_elyes.housewad.service.UserService
 
 class GuestFragment : Fragment() {
     private var guests: ArrayList<GuestData> = ArrayList()
     private lateinit var guestAdapter: GuestAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_guest, container, false)
-        var verify = view.findViewById<TextView>(R.id.textVerify)
+        val verify = view.findViewById<TextView>(R.id.textVerify)
 
 //        requireActivity(): Returns the Activity that the fragment is currently associated with. This is useful when you need to interact with the Activity itself or call methods that are specific to the Activity class.
 //        requireContext(): Returns the Context that the fragment is currently associated with. This is useful when you need a Context for operations like accessing resources, starting services, or creating views.
@@ -37,11 +37,11 @@ class GuestFragment : Fragment() {
         initGuestsList(view) //init la list avant le load des infos))
         loadGuests()
         view.findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
-            menu(it)
+            menu()
         }
 
         view.findViewById<ImageButton>(R.id.buttonAddGuest).setOnClickListener {
-            var guestName = view.findViewById<EditText>(R.id.editGuestName)
+            val guestName = view.findViewById<EditText>(R.id.editGuestName)
             if (guestName.text.toString() != "") {
                 addGuests(guestName.text.toString())
                 guestName.text.clear()
@@ -52,15 +52,15 @@ class GuestFragment : Fragment() {
         return view
     }
 
-    private fun menu(view: View) {
+    private fun menu() {
         FragmentService().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//    }
 
     private fun initGuestsList(view: View){
         val listView = view.findViewById<ListView>(R.id.listGuests)
