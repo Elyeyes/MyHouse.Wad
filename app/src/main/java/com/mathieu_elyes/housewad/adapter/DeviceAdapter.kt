@@ -1,5 +1,6 @@
 package com.mathieu_elyes.housewad.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -12,6 +13,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
+import android.widget.Toast
 import com.mathieu_elyes.housewad.datamodel.CommandData
 import com.mathieu_elyes.housewad.datamodel.DeviceListData
 import com.mathieu_elyes.housewad.storage.DeviceStorage
@@ -129,6 +131,10 @@ class DeviceAdapter(private val context: Context,
                         }
                     }
                 }
+            }
+        }else{
+            (context as? Activity)?.runOnUiThread {
+                Toast.makeText((context as? Activity), "Error, Please Try Again", Toast.LENGTH_LONG).show()
             }
         }
     }

@@ -10,6 +10,7 @@ import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import com.mathieu_elyes.housewad.ModeEditActivity
 import com.mathieu_elyes.housewad.datamodel.ModeData
 import com.mathieu_elyes.housewad.R
@@ -72,8 +73,13 @@ private val modes: ArrayList<ModeData>) : BaseAdapter() {
 
     private fun commandSuccess(responseCode: Int) {
         if (responseCode == 200) {
-            System.out.println("reussi")
-            return
+            (context as? Activity)?.runOnUiThread {
+                Toast.makeText((context as? Activity), "Mode Applied", Toast.LENGTH_LONG).show()
+            }
+        }else{
+            (context as? Activity)?.runOnUiThread {
+                Toast.makeText((context as? Activity), "Error, Please Try Again", Toast.LENGTH_LONG).show()
+            }
         }
     }
 

@@ -23,6 +23,7 @@
     <string name="DevicesOfMode">Appareil du Mode</string>
     <string name="TurnOn">Allumer</string>
     <string name="TurnOff">Éteindre</string>
-    <string name="Open">Ouvrir</string>
+    <string name="Open">Ouvrir</string>SelectModeName
     <string name="Close">Fermer</string>
+    <string name="SelectModeName">Choisir Nom de Mode</string>
 </resources>

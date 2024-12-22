@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mathieu_elyes.housewad.adapter.GuestAdapter
 import com.mathieu_elyes.housewad.datamodel.GuestData
@@ -76,6 +77,10 @@ class GuestFragment : Fragment() {
             guests.clear()
             guests.addAll(loadedGuests)
             updateGuestsList()
+        }else if(responseCode == 500){
+            requireActivity().runOnUiThread {
+                Toast.makeText(requireActivity(), "Error, Please Try Again", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -86,9 +91,14 @@ class GuestFragment : Fragment() {
     private fun addGuestSuccess(responseCode: Int){
         if (responseCode == 200) {
             loadGuests()
-        }
-        else if(responseCode == 500){
-            System.out.println("Guest already exists or invalid name")
+        }else if(responseCode == 400){
+            requireActivity().runOnUiThread {
+                Toast.makeText(requireActivity(), "Invalid Username, Try Again", Toast.LENGTH_LONG).show()
+            }
+        }else{
+            requireActivity().runOnUiThread {
+                Toast.makeText(requireActivity(), "Error, Please Try Again", Toast.LENGTH_LONG).show()
+            }
         }
     }
 

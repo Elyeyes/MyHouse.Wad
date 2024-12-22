@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
@@ -78,15 +79,19 @@ class MenuFragment : Fragment() {
                     } else {
                         CommandData("CLOSE")
                     }
-                    DeviceService(requireActivity()).command(device.id, commandData, ::commandSuccess)
+                    DeviceService(requireActivity()).command(device.id, commandData, ::shutdownSuccess)
                 }
             }
         }
     }
 
-    private fun commandSuccess(responseCode: Int) {
+    private fun shutdownSuccess(responseCode: Int) {
         if (responseCode == 200) {
             return
+        }else{
+            requireActivity().runOnUiThread {
+                Toast.makeText(requireActivity(), "Error, Please Try Again", Toast.LENGTH_LONG).show()
+            }
         }
     }
 

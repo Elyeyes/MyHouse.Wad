@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.mathieu_elyes.housewad.datamodel.LoginOrRegisterData
@@ -49,6 +50,18 @@ class MainActivity : AppCompatActivity() {
                 saveToken(token)
                 val intent = Intent(this@MainActivity, HousesActivity::class.java)
                 startActivity(intent)
+            }
+        }else if (responseCode == 400){
+            runOnUiThread {
+                Toast.makeText(this, "Username or Password Invalid. Please try again.", Toast.LENGTH_LONG).show()
+            }
+        }else if (responseCode == 404){
+            runOnUiThread {
+                Toast.makeText(this, "Username doesn't Exist. Please try again.", Toast.LENGTH_LONG).show()
+            }
+        }else{
+            runOnUiThread {
+                Toast.makeText(this, "Login failed. Please try again.", Toast.LENGTH_LONG).show()
             }
         }
     }

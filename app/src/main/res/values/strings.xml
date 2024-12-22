@@ -25,4 +25,5 @@
     <string name="TurnOff">Turn Off</string>
     <string name="Open">Open</string>
     <string name="Close">Close</string>
+    <string name="SelectModeName">Select Mode Name</string>
 </resources>

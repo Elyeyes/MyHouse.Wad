@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import com.mathieu_elyes.housewad.datamodel.GuestData
 import com.mathieu_elyes.housewad.R
 import com.mathieu_elyes.housewad.service.UserService
@@ -52,8 +53,10 @@ class GuestAdapter(private val context: Context,
                         (context as? Activity)?.runOnUiThread {
                             notifyDataSetChanged()
                         }
-                    } else {
-                        println("Guest not deleted")
+                    }else{
+                        (context as? Activity)?.runOnUiThread {
+                            Toast.makeText((context as? Activity), "Guest Not Deleted", Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
             }

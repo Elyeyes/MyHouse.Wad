@@ -40,7 +40,7 @@ class ModesFragment : Fragment() {
             menu()
         }
         view.findViewById<ImageButton>(R.id.iButtonAdd).setOnClickListener {
-            val intent = Intent(context, ModeEditActivity::class.java)
+            val intent = Intent(context, ModeCreateActivity::class.java)
             startActivity(intent)
         }
         return view

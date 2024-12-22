@@ -3,6 +3,7 @@ package com.mathieu_elyes.housewad
 import android.os.Bundle
 import android.view.View
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.mathieu_elyes.housewad.adapter.HouseAdapter
 import com.mathieu_elyes.housewad.datamodel.HouseData
@@ -39,6 +40,10 @@ class HousesActivity : AppCompatActivity() {
             houses.clear()
             houses.addAll(loadedHouses)
             updateHousesList()
+        }else{
+            runOnUiThread {
+                Toast.makeText(this, "Houses Loading Failed. Please Retry.", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
