@@ -12,7 +12,7 @@ class ModeService(context: Context): BaseService(context) {
         writeMode(modeData)
     }
 
-    fun deleteMode(modeName: String){
-        removeMode(modeName)
-    }
+//    fun deleteMode(modeName: String){
+//        removeMode(modeName)
+//    }
 }

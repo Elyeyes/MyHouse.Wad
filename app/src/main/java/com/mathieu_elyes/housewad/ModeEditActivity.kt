@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.mathieu_elyes.housewad.adapter.DeviceSetupAdapter
 import com.mathieu_elyes.housewad.datamodel.DeviceSetupData
 import com.mathieu_elyes.housewad.datamodel.ModeData
 import com.mathieu_elyes.housewad.service.ModeService
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 class ModeEditActivity : AppCompatActivity(), DeviceSetupAdapter.DeviceSetupAdapterCallback  {
     private val mainScope = MainScope()
@@ -36,13 +38,17 @@ class ModeEditActivity : AppCompatActivity(), DeviceSetupAdapter.DeviceSetupAdap
     private fun initDeviceMode() {
         val listView = findViewById<ListView>(R.id.listDevicesOfMode)
         listView.adapter = deviceSetupAdapter
-        mode = ModeService(this).loadMode()!!
+        mainScope.launch {
+            val storedMode = ModeService(this@ModeEditActivity).loadMode()!!
+//            if (storedMode != null && storedMode.deviceSetupList.isNotEmpty())
+            if (storedMode.deviceSetupList.isNotEmpty()) {
+                mode = storedMode
+                devices.clear()
+                devices.addAll(mode.deviceSetupList)
+                deviceSetupAdapter.notifyDataSetChanged()
+            }
+        }
     }
-
-//    private suspend fun readMode() {
-//        val modeStorage = ModeStorage(this)
-//        mode = modeStorage.read() ?: ModeData("Default", ArrayList())
-//    }
 
     private fun loadDeviceMode() {
         val textDeviceOfMode = findViewById<TextView>(R.id.textDeviceOfMode)
@@ -57,12 +63,14 @@ class ModeEditActivity : AppCompatActivity(), DeviceSetupAdapter.DeviceSetupAdap
     }
 
     private fun save() {
-        ModeService(this).saveMode(mode)
-        System.out.println("mode: $mode")
-        finish()
+        mainScope.launch {
+            ModeService(this@ModeEditActivity).saveMode(mode)
+            Toast.makeText(this@ModeEditActivity, "Mode Saved", Toast.LENGTH_LONG).show()
+            finish()
+        }
     }
 
     override fun onDeviceCommandChanged() {
-        loadDeviceMode()
+        deviceSetupAdapter.notifyDataSetChanged()
     }
 }

@@ -13,11 +13,10 @@ import android.widget.TextView
 import com.mathieu_elyes.housewad.R
 import com.mathieu_elyes.housewad.datamodel.CommandData
 import com.mathieu_elyes.housewad.datamodel.DeviceSetupData
-import com.mathieu_elyes.housewad.service.ModeService
 
 class DeviceSetupAdapter(private val context: Context,
-    private val devices: ArrayList<DeviceSetupData>,
-     private val callback: DeviceSetupAdapterCallback) : BaseAdapter() {
+                         private val devices: ArrayList<DeviceSetupData>,
+                         private val callback: DeviceSetupAdapterCallback) : BaseAdapter() {
     interface DeviceSetupAdapterCallback {
         fun onDeviceCommandChanged()
     }
@@ -47,7 +46,7 @@ class DeviceSetupAdapter(private val context: Context,
         val deviceButtonDown = rowView.findViewById<ImageButton>(R.id.ibuttonDeviceDown)
 
         val deviceIcon = rowView.findViewById<ImageView>(R.id.imageDevice)
-        deviceName.text = devices[position].id
+        deviceName.text = "Mode: ${devices[position].id}"
 
         textState.visibility = View.VISIBLE
         deviceSwitch.visibility = View.VISIBLE
@@ -95,7 +94,6 @@ class DeviceSetupAdapter(private val context: Context,
             }
             notifyDataSetChanged()
             callback.onDeviceCommandChanged()
-            System.out.println("DEVICESETUP " + devices)
         }
         return rowView
     }

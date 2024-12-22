@@ -26,4 +26,5 @@
     <string name="Open">Open</string>
     <string name="Close">Close</string>
     <string name="SelectModeName">Select Mode Name</string>
+    <string name="Secure">Lights Out</string>
 </resources>

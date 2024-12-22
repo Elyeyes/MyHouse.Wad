@@ -33,7 +33,7 @@ abstract class BaseService(val context: Context) {
         runBlocking { ModeStorage(context).write(mode) }
     }
 
-    protected fun removeMode(modeToRemove: String) {
-        runBlocking { ModeStorage(context).remove(modeToRemove) }
-    }
+//    protected fun removeMode(modeToRemove: String) {
+//        runBlocking { ModeStorage(context).remove(modeToRemove) }
+//    }
 }

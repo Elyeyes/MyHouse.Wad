@@ -1,6 +1,6 @@
 package com.mathieu_elyes.housewad.datamodel
 
 data class ModeData(
-    val name: String,
-    val deviceSetupList: ArrayList<DeviceSetupData>
+    var name: String,
+    var deviceSetupList: ArrayList<DeviceSetupData>
 )

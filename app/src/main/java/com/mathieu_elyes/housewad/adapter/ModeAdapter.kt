@@ -8,19 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import com.mathieu_elyes.housewad.ModeEditActivity
+import com.mathieu_elyes.housewad.ModeCreateActivity
 import com.mathieu_elyes.housewad.datamodel.ModeData
 import com.mathieu_elyes.housewad.R
 import com.mathieu_elyes.housewad.service.DeviceService
-import com.mathieu_elyes.housewad.storage.ModeStorage
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class ModeAdapter(private val context: Context,
-private val modes: ArrayList<ModeData>) : BaseAdapter() {
+                  private val modes: ArrayList<ModeData>,
+                  private val callback: ModeAdapterCallback) : BaseAdapter() {
+    interface ModeAdapterCallback {
+        fun onModeIntent()
+    }
     private val mainScope = MainScope()
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     override fun getItemId(position: Int): Long {
@@ -39,21 +41,20 @@ private val modes: ArrayList<ModeData>) : BaseAdapter() {
         val rowView = inflater.inflate(R.layout.list_item_modes, parent, false)
         val mode = getItem(position) as ModeData
         val modeName = rowView.findViewById<TextView>(R.id.textModeName)
-        val delete = rowView.findViewById<ImageButton>(R.id.imageButtonRemove)
+//        val delete = rowView.findViewById<ImageButton>(R.id.imageButtonRemove)
         val apply = rowView.findViewById<Button>(R.id.ButtonApply)
         modeName.text = mode.name
 
-        delete.setOnClickListener {
-            modes.removeAt(position)
-            (context as? Activity)?.runOnUiThread {
-                notifyDataSetChanged()
-            }
-        }
+//        delete.setOnClickListener {
+//            ModeService(context).deleteMode(modes[position].name)
+//            modes.removeAt(position)
+//            (context as? Activity)?.runOnUiThread {
+//                notifyDataSetChanged()
+//            }
+//        }
 
         apply.setOnClickListener {
             for(device in modes[position].deviceSetupList){
-                System.out.println(modes[position].deviceSetupList)
-                System.out.println("device id: " + device.id + " command: " + device.commandSetup + " mode: " + modes[position].name)
                 val deviceId = device.id
                 val commandData = device.commandSetup
                 DeviceService(this.context).command(deviceId, commandData, ::commandSuccess)
@@ -62,12 +63,11 @@ private val modes: ArrayList<ModeData>) : BaseAdapter() {
 
         rowView.setOnClickListener {
             mainScope.launch {
-                saveMode(modes[position])
-                val intent = Intent(context, ModeEditActivity::class.java)
+                callback.onModeIntent()
+                val intent = Intent(context, ModeCreateActivity::class.java)
                 context.startActivity(intent)
             }
         }
-
         return rowView
     }
 
@@ -83,10 +83,8 @@ private val modes: ArrayList<ModeData>) : BaseAdapter() {
         }
     }
 
-    private suspend fun saveMode(mode: ModeData)
-    {
-        val modeStorage = ModeStorage(context)
-        modeStorage.write(mode)
-        System.out.println("nom: " + mode.name + " " + mode.deviceSetupList)
-    }
+//    private suspend fun saveMode(mode: ModeData)
+//    {
+//        ModeService(context).saveMode(mode)
+//    }
 }

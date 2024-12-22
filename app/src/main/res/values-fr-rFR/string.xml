@@ -26,4 +26,5 @@
     <string name="Open">Ouvrir</string>SelectModeName
     <string name="Close">Fermer</string>
     <string name="SelectModeName">Choisir Nom de Mode</string>
+    <string name="Secure">Tout Fermer</string>
 </resources>

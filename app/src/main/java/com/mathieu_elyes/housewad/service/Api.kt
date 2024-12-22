@@ -112,7 +112,6 @@ class Api {
         }
         catch(e: Exception)
         {
-
             System.out.println("Debug error parsing JSON $e")
             return null
         }

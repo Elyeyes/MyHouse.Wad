@@ -26,11 +26,10 @@ class ModeStorage(private val context: Context) {
         return modeJson.let { gson.fromJson(it, ModeData::class.java) }
     }
 
-    suspend fun remove(modeToRemove: String) {
-        val currentModes = read() ?: return
-        val updatedModes = currentModes.deviceSetupList.filterNot { mode.name == modeToRemove }
-        val newModeData = ModeData(currentModes.name, ArrayList(updatedModes))
-        System.out.println("REMOVED $currentModes \n $updatedModes \n  $newModeData")
-        write(newModeData)
-    }
+//    suspend fun remove(modeToRemove: String) {
+//        val currentModes = read() ?: return
+//        val updatedModes = currentModes.deviceSetupList.filterNot { mode.name == modeToRemove }
+//        val newModeData = ModeData(currentModes.name, ArrayList(updatedModes))
+//        write(newModeData)
+//    }
 }
