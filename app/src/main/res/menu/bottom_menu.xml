@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/devices"
@@ -9,7 +8,7 @@
     <item
         android:id="@+id/modes"
         android:icon="@drawable/mode"
-        android:title="Modes" />
+        android:title="@string/Modes" />
     <item
         android:id="@+id/guest"
         android:icon="@drawable/guest"
@@ -17,6 +16,6 @@
     <item
         android:id="@+id/otherFragmentItem"
         android:icon="@drawable/mode"
-        android:title="test"
+        android:title="@string/Devices"
         android:visible="false" />
 </menu>
