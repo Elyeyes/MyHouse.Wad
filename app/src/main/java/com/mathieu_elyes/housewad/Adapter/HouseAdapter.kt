@@ -49,7 +49,6 @@ class HouseAdapter(private val context: Context,
         return rowView
     }
 
-
     private fun saveHouseId(houseId: String)
     {
         val houseIdStorage = HouseIdStorage(context)

@@ -18,8 +18,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (AppCompatDelegate.getDefaultNightMode() == -100)
-        {
+        val sharedPreferences = getSharedPreferences("AppPreferences", MODE_PRIVATE)
+        val isNightMode = sharedPreferences.getBoolean("NightMode", false)
+        if (isNightMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }

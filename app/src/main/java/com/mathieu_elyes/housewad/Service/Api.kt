@@ -105,15 +105,15 @@ class Api {
     {
         val reader = BufferedReader(InputStreamReader(connection.inputStream));
         val jsonData = reader.readText();
-        System.out.println("BITE responseCode " + connection.responseCode)
-        System.out.println("BITE responseBody " + jsonData)
+        System.out.println("Debug responseCode " + connection.responseCode)
+        System.out.println("Debug responseBody " + jsonData)
         try {
             return parseJSON<T>(jsonData);
         }
         catch(e: Exception)
         {
 
-            System.out.println("BITE error parsing JSON " + e)
+            System.out.println("Debug error parsing JSON " + e)
             return null
         }
     }

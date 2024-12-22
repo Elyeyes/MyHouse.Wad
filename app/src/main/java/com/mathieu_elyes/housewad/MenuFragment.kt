@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import com.mathieu_elyes.housewad.DataModel.CommandData
@@ -29,29 +30,8 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_menu, container, false)
+        SetSpinner(view)
 
-        val languages = arrayOf(getString(R.string.selectLanguage), getString(R.string.English), getString(R.string.French))
-        val spinner = view.findViewById<Spinner>(R.id.spinnerLanguage)
-        val adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, languages)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
-        spinner.setSelection(0)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val langCode = when (position) {
-                    1 -> "en"
-                    2 -> "fr"
-                    else -> ""
-                }
-                if (langCode.isNotEmpty()) {
-                    AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(langCode))
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Do nothing
-            }
-        }
         val textWelcome = view.findViewById<TextView>(R.id.textWelcome)
         textWelcome.text = getString(R.string.House) + ": " + HouseService(requireContext()).getHouse()
 
@@ -67,15 +47,21 @@ class MenuFragment : Fragment() {
         return view
     }
 
-    public fun changeDisplayMode() {
+    private fun changeDisplayMode() {
         val switchIcon = requireActivity().findViewById<ImageButton>(R.id.buttonNDMode)
+        val sharedPreferences = requireActivity().getSharedPreferences("AppPreferences", AppCompatActivity.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             switchIcon.setImageResource(R.drawable.day)
+            editor.putBoolean("NightMode", true)
         } else {
             switchIcon.setImageResource(R.drawable.night_icon)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            editor.putBoolean("NightMode", false)
         }
+        editor.apply()
         requireActivity().recreate()
     }
 
@@ -97,9 +83,35 @@ class MenuFragment : Fragment() {
             }
         }
     }
+
     private fun commandSuccess(responseCode: Int) {
         if (responseCode == 200) {
             return
+        }
+    }
+
+    public fun SetSpinner(view: View) {
+        val languages = arrayOf(getString(R.string.selectLanguage), getString(R.string.English), getString(R.string.French))
+        val spinner = view.findViewById<Spinner>(R.id.spinnerLanguage)
+        val adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, languages)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+        spinner.setSelection(0)
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val langCode = when (position) {
+                    1 -> "en"
+                    2 -> "fr"
+                    else -> ""
+                }
+                if (langCode.isNotEmpty()) {
+                    AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(langCode))
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
         }
     }
 

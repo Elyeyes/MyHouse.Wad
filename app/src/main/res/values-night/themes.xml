@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@color/trans</item>
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorTertiary">@color/tertiaryColor</item>
+        <item name="android:icon">@drawable/day</item>
         <item name="android:textColor">@color/white</item>
     </style>
 </resources>
