@@ -14,12 +14,12 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
     }
 
-    public fun back(view: View)
+    fun back(view: View)
     {
         finish()
     }
 
-    public fun register(view: View)
+    fun register(view: View)
     {
         val login = findViewById<EditText>(R.id.editUsername).text.toString()
         val password = findViewById<EditText>(R.id.editPassword).text.toString()

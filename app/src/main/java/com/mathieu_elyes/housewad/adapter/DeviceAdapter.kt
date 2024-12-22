@@ -16,7 +16,6 @@ import android.widget.TextView
 import android.widget.Toast
 import com.mathieu_elyes.housewad.datamodel.CommandData
 import com.mathieu_elyes.housewad.datamodel.DeviceListData
-import com.mathieu_elyes.housewad.storage.DeviceStorage
 import com.mathieu_elyes.housewad.R
 import com.mathieu_elyes.housewad.service.DeviceService
 import kotlinx.coroutines.MainScope

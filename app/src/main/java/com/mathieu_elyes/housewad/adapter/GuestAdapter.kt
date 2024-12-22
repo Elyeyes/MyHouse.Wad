@@ -53,6 +53,10 @@ class GuestAdapter(private val context: Context,
                         (context as? Activity)?.runOnUiThread {
                             notifyDataSetChanged()
                         }
+                    }else if(responseCode == 403){
+                        (context as? Activity)?.runOnUiThread {
+                            Toast.makeText((context as? Activity), "Idiot your are not the owner", Toast.LENGTH_LONG).show()
+                        }
                     }else{
                         (context as? Activity)?.runOnUiThread {
                             Toast.makeText((context as? Activity), "Guest Not Deleted", Toast.LENGTH_LONG).show()

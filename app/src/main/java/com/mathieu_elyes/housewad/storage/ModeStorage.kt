@@ -30,7 +30,7 @@ class ModeStorage(private val context: Context) {
         val currentModes = read() ?: return
         val updatedModes = currentModes.deviceSetupList.filterNot { mode.name == modeToRemove }
         val newModeData = ModeData(currentModes.name, ArrayList(updatedModes))
-        System.out.println("REMOVED" + currentModes + "\n" + updatedModes + "\n" + newModeData)
+        System.out.println("REMOVED $currentModes \n $updatedModes \n  $newModeData")
         write(newModeData)
     }
 }

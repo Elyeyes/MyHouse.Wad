@@ -21,7 +21,7 @@
         android:id="@+id/ButtonApply"
         android:layout_width="80dp"
         android:layout_height="52dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="40dp"
         android:backgroundTint="?attr/colorPrimary"
         android:fontFamily="@font/helvetica"
         android:text="Apply"
@@ -34,12 +34,13 @@
         android:id="@+id/imageButtonRemove"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/trans"
         android:padding="10dp"
         android:scaleType="fitCenter"
-        android:background="@color/trans"
+        app:layout_constraintBottom_toBottomOf="@+id/ButtonApply"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ButtonApply"
-        app:layout_constraintBottom_toBottomOf="@+id/ButtonApply"
         app:srcCompat="@drawable/close" />
 
 

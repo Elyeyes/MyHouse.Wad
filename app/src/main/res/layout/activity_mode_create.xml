@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DevicesFragment">
-
+    tools:context=".ModeEditActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -14,72 +14,52 @@
 
         <ImageButton
             android:id="@+id/buttonBack"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:background="@color/trans"
-            android:padding="10dp"
+            android:padding="7dp"
             android:scaleType="fitCenter"
             android:src="@drawable/back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textHouseName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/helvetica"
-            android:text="@string/DevicesofHouse"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.448"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
         <ImageButton
-            android:id="@+id/buttonReload"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="8dp"
-            android:scaleType="fitCenter"
-            android:layout_marginStart="8dp"
-            android:background="@color/trans"
-            android:src="@drawable/reload"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textHouseName"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
-
-        <ImageButton
-            android:id="@+id/buttonChangeDisplay"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:id="@+id/buttonSave"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginEnd="8dp"
             android:background="@color/trans"
-            android:padding="7dp"
+            android:padding="0dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/device"
+            android:src="@drawable/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="TouchTargetSizeCheck" />
 
+        <EditText
+            android:id="@+id/editModeName"
+            android:layout_width="190dp"
+            android:layout_height="45dp"
+            android:hint="@string/SelectModeName"
+            android:inputType="text"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.316"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <ListView
-        android:id="@+id/listDevices"
+        android:id="@+id/listDevicesOfMode"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,6 @@ package com.mathieu_elyes.housewad.service
 
 import android.content.Context
 import com.mathieu_elyes.housewad.datamodel.ModeData
-import com.mathieu_elyes.housewad.storage.DeviceStorage
 import com.mathieu_elyes.housewad.storage.HouseIdStorage
 import com.mathieu_elyes.housewad.storage.ModeStorage
 import com.mathieu_elyes.housewad.storage.TokenStorage

@@ -1,17 +1,25 @@
 package com.mathieu_elyes.housewad
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.mathieu_elyes.housewad.adapter.DeviceSetupAdapter
+import com.mathieu_elyes.housewad.datamodel.CommandData
+import com.mathieu_elyes.housewad.datamodel.DeviceListData
 import com.mathieu_elyes.housewad.datamodel.DeviceSetupData
 import com.mathieu_elyes.housewad.datamodel.ModeData
+import com.mathieu_elyes.housewad.service.DeviceService
 import com.mathieu_elyes.housewad.service.ModeService
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
-class ModeEditActivity : AppCompatActivity(), DeviceSetupAdapter.DeviceSetupAdapterCallback  {
+class ModeCreateActivity : AppCompatActivity(), DeviceSetupAdapter.DeviceSetupAdapterCallback  {
     private val mainScope = MainScope()
     private var devices: ArrayList<DeviceSetupData> = ArrayList()
     private var mode: ModeData = ModeData("Default", devices)
@@ -19,11 +27,10 @@ class ModeEditActivity : AppCompatActivity(), DeviceSetupAdapter.DeviceSetupAdap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mode_edit)
+        setContentView(R.layout.activity_mode_create)
 
         deviceSetupAdapter = DeviceSetupAdapter(this, devices, this)
         initDeviceMode()
-        loadDeviceMode()
 
         findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
             back()
@@ -37,6 +44,9 @@ class ModeEditActivity : AppCompatActivity(), DeviceSetupAdapter.DeviceSetupAdap
         val listView = findViewById<ListView>(R.id.listDevicesOfMode)
         listView.adapter = deviceSetupAdapter
         mode = ModeService(this).loadMode()!!
+        mainScope.launch {
+            DeviceService(this@ModeCreateActivity).loadDevices(::initDevicesSuccess)
+        }
     }
 
 //    private suspend fun readMode() {
@@ -45,12 +55,32 @@ class ModeEditActivity : AppCompatActivity(), DeviceSetupAdapter.DeviceSetupAdap
 //    }
 
     private fun loadDeviceMode() {
-        val textDeviceOfMode = findViewById<TextView>(R.id.textDeviceOfMode)
-        textDeviceOfMode.text = getString(R.string.DevicesOfMode) + ": ${mode.name}"
         devices.clear()
         devices.addAll(mode.deviceSetupList)
         deviceSetupAdapter.notifyDataSetChanged()
     }
+
+
+    private fun initDevicesSuccess(responseCode: Int, responseBody: DeviceListData?) {
+        if (responseCode == 200 && responseBody != null) {
+            runOnUiThread {
+                devices.clear()
+                for (device in responseBody.devices) {
+                    val command = if (device.type == "light") {
+                        CommandData("TURN OFF")
+                    } else {
+                        CommandData("CLOSE")
+                    }
+                    devices.add(DeviceSetupData(device.id, command))
+                }
+                deviceSetupAdapter.notifyDataSetChanged()
+            }
+        } else {
+//            errorLoadingHouse()
+        }
+    }
+
+
 
     private fun back() {
         finish()

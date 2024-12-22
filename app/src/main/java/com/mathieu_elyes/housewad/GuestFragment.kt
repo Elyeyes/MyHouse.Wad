@@ -95,6 +95,10 @@ class GuestFragment : Fragment() {
             requireActivity().runOnUiThread {
                 Toast.makeText(requireActivity(), "Invalid Username, Try Again", Toast.LENGTH_LONG).show()
             }
+        }else if(responseCode == 403){
+            requireActivity().runOnUiThread {
+                Toast.makeText(requireActivity(), "Idiot your are not the owner", Toast.LENGTH_LONG).show()
+            }
         }else{
             requireActivity().runOnUiThread {
                 Toast.makeText(requireActivity(), "Error, Please Try Again", Toast.LENGTH_LONG).show()

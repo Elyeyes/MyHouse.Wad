@@ -13,6 +13,7 @@ import com.mathieu_elyes.housewad.NavigationActivity
 import com.mathieu_elyes.housewad.R
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class HouseAdapter(private val context: Context,
                    private val houses: ArrayList<HouseData>) : BaseAdapter() {
@@ -42,8 +43,8 @@ class HouseAdapter(private val context: Context,
 
         }
         rowView.setOnClickListener {
+            runBlocking{saveHouseId(house.houseId.toString())}
             val intent = Intent(context, NavigationActivity::class.java)
-            saveHouseId(house.houseId.toString())
             context.startActivity(intent)
         }
         return rowView

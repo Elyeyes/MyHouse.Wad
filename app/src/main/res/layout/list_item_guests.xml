@@ -30,11 +30,12 @@
         android:id="@+id/imageButtonRemove"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/trans"
         android:padding="10dp"
         android:scaleType="fitCenter"
-        android:background="@color/trans"
+        app:layout_constraintBottom_toBottomOf="@+id/textGuestName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textGuestName"
-        app:layout_constraintBottom_toBottomOf="@+id/textGuestName"
         app:srcCompat="@drawable/close" />
 </androidx.constraintlayout.widget.ConstraintLayout>
