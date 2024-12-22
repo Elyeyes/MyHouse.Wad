@@ -36,7 +36,7 @@ class DevicesFragment : Fragment() {
 //        requireContext(): Returns the Context that the fragment is currently associated with. This is useful when you need a Context for operations like accessing resources, starting services, or creating views.
 //        In many cases, requireActivity() and requireContext() can be used interchangeably because an Activity is a subclass of Context. However, if you specifically need to interact with the Activity, you should use requireActivity(). If you only need a Context, requireContext() is more appropriate.
         val textHouse = view.findViewById<TextView>(R.id.textHouseName)
-        textHouse.text = "Devices of House: ${HouseService(requireActivity()).getHouse()}"
+        textHouse.text = getString(R.string.DevicesofHouse) + ": ${HouseService(requireActivity()).getHouse()}"
 
         deviceAdapter = DeviceAdapter(requireContext(), devices, devicesDisplayed)
         initDeviceList(view) //init la list avant le load des infos))

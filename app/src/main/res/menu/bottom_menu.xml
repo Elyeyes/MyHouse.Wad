@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/rooms"
+        android:id="@+id/devices"
         android:icon="@drawable/device"
-        android:title="Rooms" />
+        android:title="@string/Devices" />
     <item
         android:id="@+id/modes"
         android:icon="@drawable/mode"
@@ -13,7 +13,7 @@
     <item
         android:id="@+id/guest"
         android:icon="@drawable/guest"
-        android:title="Guest" />
+        android:title="@string/Guest" />
     <item
         android:id="@+id/otherFragmentItem"
         android:icon="@drawable/mode"

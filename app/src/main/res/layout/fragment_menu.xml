@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/helvetica"
-            android:text="House nb of User"
+            android:text="@string/House"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,6 +56,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <Spinner
+        android:id="@+id/spinnerLanguage"
+        android:layout_width="236dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="400dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonShutdown"

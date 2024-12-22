@@ -41,8 +41,8 @@
 
     <Button
         android:id="@+id/buttonDeviceStop"
-        android:layout_width="90dp"
-        android:layout_height="49dp"
+        android:layout_width="97dp"
+        android:layout_height="48dp"
         android:backgroundTint="?attr/colorPrimary"
         android:fontFamily="@font/helvetica"
         android:text="%"

@@ -55,7 +55,7 @@ class DeviceAdapter(private val context: Context,
                 if(devices[position].opening == 0.0 || devices[position].opening == 1.0){ // le shutter peut etre toujour entrain de "monter" mais au max donc egal à 0
                     deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
                 }else{
-                    deviceStop.text = "STOP"
+                    deviceStop.text = context.getString(R.string.Stop)
                 }
             }else{
                 deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
@@ -76,7 +76,7 @@ class DeviceAdapter(private val context: Context,
                 if(devices[position].opening == 0.0 || devices[position].opening == 1.0){
                     deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"
                 }else{
-                    deviceStop.text = "STOP"
+                    deviceStop.text = context.getString(R.string.Stop)
                 }
             }else{
                 deviceStop.text = "${(devices[position].opening!! * 100).toInt()}%"

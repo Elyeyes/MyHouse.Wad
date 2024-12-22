@@ -11,6 +11,7 @@ import com.mathieu_elyes.housewad.DataModel.HouseData
 import com.mathieu_elyes.housewad.Storage.HouseIdStorage
 import com.mathieu_elyes.housewad.NavigationActivity
 import com.mathieu_elyes.housewad.R
+import com.mathieu_elyes.housewad.Service.HouseService
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -24,7 +25,6 @@ class HouseAdapter(private val context: Context,
     }
 
     override fun getItem(position: Int): Any {
-        System.out.println("houses" + houses[position])
         return houses[position]
     }
 
@@ -37,9 +37,10 @@ class HouseAdapter(private val context: Context,
         val house = getItem(position) as HouseData
         val houseName = rowView.findViewById<TextView>(R.id.textHouseName)
         if (house.owner) {
-            houseName.text = "House:" + house.houseId.toString() + " Owner"
+            houseName.text = context.getString(R.string.House) + ": " + house.houseId.toString() + " " + context.getString(R.string.Owner)
         } else {
-            houseName.text = "House:" + house.houseId.toString() + " Guest"
+            houseName.text = context.getString(R.string.House) + ": " + house.houseId.toString() + " " + context.getString(R.string.Guest)
+
         }
         rowView.setOnClickListener {
             val intent = Intent(context, NavigationActivity::class.java)

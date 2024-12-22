@@ -37,12 +37,12 @@ class GuestAdapter(private val context: Context,
         val delete = rowView.findViewById<ImageButton>(R.id.imageButtonRemove)
         if(guest.owner == 1)
         {
-            guestName.text = guest.userLogin + " | Owner"
+            guestName.text = guest.userLogin + " | " + context.getString(R.string.Owner)
             delete.visibility = View.INVISIBLE
         }
         else
         {
-            guestName.text = guest.userLogin + " | Guest"
+            guestName.text = guest.userLogin + " | " + context.getString(R.string.Guest)
         }
         delete.setOnClickListener {
             mainScope.launch {

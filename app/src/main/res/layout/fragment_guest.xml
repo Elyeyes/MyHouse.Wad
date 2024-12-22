@@ -31,7 +31,7 @@
             android:id="@+id/editGuestName"
             android:layout_width="227dp"
             android:layout_height="45dp"
-            android:hint="Add a friend"
+            android:hint="@string/AddFriend"
             android:inputType="text"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"

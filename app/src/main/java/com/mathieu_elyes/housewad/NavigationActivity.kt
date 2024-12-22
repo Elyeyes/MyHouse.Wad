@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -29,7 +28,7 @@ class NavigationActivity : AppCompatActivity() {
                 handler.postDelayed({ isNavigationEnabled = true }, 500)
                 isNavigationEnabled = false
                 when (item.itemId) {
-                    R.id.rooms -> replaceFragment(DevicesFragment())
+                    R.id.devices -> replaceFragment(DevicesFragment())
                     R.id.modes -> replaceFragment(ModesFragment())
                     R.id.guest -> replaceFragment(GuestFragment())
                 }

@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">HouseWad</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="ListofyourHouses">Liste de vos Maisons</string>
+    <string name="House">Maison</string>
+    <string name="Owner">Propriétaire</string>
+    <string name="Welcome">Bienvenue</string>
+    <string name="NoAccount">pas de compte?</string>
+    <string name="Login">Se Connecter</string>
+    <string name="Username">Pseudonyme</string>
+    <string name="Password">Mot de Passe</string>
+    <string name="Devices">Appareils</string>
+    <string name="DevicesofHouse">Appareils de la Maison</string>
+    <string name="Modes">Modes</string>
+    <string name="Guest">Invités</string>
+    <string name="CreateAccount">Créer Compte</string>
+    <string name="Register">S\'inscrire</string>
+    <string name="AlreadyHave">Déjà un compte?</string>
+    <string name="AddFriend">Ajoute un ami</string>
+    <string name="Stop">Arrêter</string>
+    <string name="selectLanguage">Choisir Langue</string>
+    <string name="English">Anglais</string>
+    <string name="French">Français</string>
+</resources>
