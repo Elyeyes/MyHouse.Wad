@@ -20,4 +20,9 @@
     <string name="selectLanguage">Choisir Langue</string>
     <string name="English">Anglais</string>
     <string name="French">Français</string>
+    <string name="DevicesOfMode">Appareil du Mode</string>
+    <string name="TurnOn">Allumer</string>
+    <string name="TurnOff">Éteindre</string>
+    <string name="Open">Ouvrir</string>
+    <string name="Close">Fermer</string>
 </resources>

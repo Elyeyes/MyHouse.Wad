@@ -50,7 +50,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/ibuttonDeviceUp"
         app:layout_constraintEnd_toStartOf="@+id/ibuttonDeviceDown"
         app:layout_constraintTop_toTopOf="@+id/ibuttonDeviceUp"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <ImageButton
         android:id="@+id/ibuttonDeviceDown"
@@ -63,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/buttonDeviceStop"
         app:srcCompat="@drawable/down"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <ImageButton
         android:id="@+id/ibuttonDeviceUp"
@@ -76,6 +76,19 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonDeviceStop"
         app:layout_constraintTop_toTopOf="@+id/textDeviceName"
         app:srcCompat="@drawable/up"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/switchLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/switchLight"
+        app:layout_constraintTop_toTopOf="@+id/switchLight"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

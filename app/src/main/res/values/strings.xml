@@ -20,5 +20,9 @@
     <string name="selectLanguage">Select Language</string>
     <string name="English">English</string>
     <string name="French">French</string>
-<!--    <string name="French">French</string>-->
+    <string name="DevicesOfMode">Devices of Mode</string>
+    <string name="TurnOn">Turn On</string>
+    <string name="TurnOff">Turn Off</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
 </resources>

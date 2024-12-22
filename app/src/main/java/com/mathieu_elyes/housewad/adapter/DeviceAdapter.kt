@@ -137,11 +137,4 @@ class DeviceAdapter(private val context: Context,
         devicesDisplayed = newDevicesDisplayed
         commandSuccess(200)
     }
-
-    private fun saveDeviceId(deviceId: String) {
-        val deviceStorage = DeviceStorage(context)
-        mainScope.launch {
-            deviceStorage.write(deviceId)
-        }
-    }
 }

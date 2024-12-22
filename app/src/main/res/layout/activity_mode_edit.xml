@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DevicesFragment">
-
+    tools:context=".ModeEditActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -26,43 +26,43 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textHouseName"
+            android:id="@+id/textDeviceOfMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/helvetica"
-            android:text="@string/DevicesofHouse"
+            android:text="@string/DevicesOfMode"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.448"
+            app:layout_constraintHorizontal_bias="0.45"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageButton
-            android:id="@+id/buttonReload"
+            android:id="@+id/buttonAddDevice"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="5dp"
-            android:scaleType="fitCenter"
             android:layout_marginStart="8dp"
             android:background="@color/trans"
-            android:src="@drawable/reload"
-            android:visibility="gone"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/add"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textHouseName"
+            app:layout_constraintStart_toEndOf="@+id/textDeviceOfMode"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
 
         <ImageButton
-            android:id="@+id/buttonChangeDisplay"
+            android:id="@+id/buttonSave"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginEnd="8dp"
             android:background="@color/trans"
-            android:padding="5dp"
+            android:padding="0dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/device"
+            android:src="@drawable/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -70,16 +70,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <ListView
-        android:id="@+id/listDevices"
+        android:id="@+id/listDevicesOfMode"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
