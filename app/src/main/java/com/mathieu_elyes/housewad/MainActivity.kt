@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.mathieu_elyes.housewad.DataModel.LoginOrRegisterData
 import com.mathieu_elyes.housewad.DataModel.TokenResponseData
 import com.mathieu_elyes.housewad.Service.UserService
@@ -17,12 +18,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        applyBackground()
-    }
-
-    private fun applyBackground() {
-        val background = BackgroundPreference.getBackground(this)
-        window.decorView.setBackgroundResource(background)
+        if (AppCompatDelegate.getDefaultNightMode() == -100)
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     public fun createUser(view: View)
@@ -30,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, RegisterActivity::class.java);
         startActivity(intent);
     }
-
 
     public fun login(view: View) {
         val login = findViewById<EditText>(R.id.editUsername).text.toString()

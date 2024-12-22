@@ -9,19 +9,20 @@
         android:id="@+id/textGuestName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/helvetica"
         android:text="TextView"
         android:textSize="34sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageGuest"
+        app:layout_constraintStart_toEndOf="@+id/imageGuest"
+        app:layout_constraintTop_toTopOf="@+id/imageGuest" />
 
     <ImageView
         android:id="@+id/imageGuest"
         android:layout_width="58dp"
         android:layout_height="58dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/guest" />
@@ -30,10 +31,11 @@
         android:id="@+id/imageButtonRemove"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="53dp"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
         android:background="@color/trans"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textGuestName"
+        app:layout_constraintBottom_toBottomOf="@+id/textGuestName"
         app:srcCompat="@drawable/close" />
 </androidx.constraintlayout.widget.ConstraintLayout>

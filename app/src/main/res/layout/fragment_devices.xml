@@ -14,12 +14,14 @@
 
         <ImageButton
             android:id="@+id/buttonBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
             android:background="@color/trans"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,17 +29,22 @@
             android:id="@+id/textHouseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="92dp"
+            android:fontFamily="@font/helvetica"
             android:text="House: gerer dans code"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/buttonBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/buttonReload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:layout_marginStart="8dp"
             android:background="@color/trans"
             android:src="@drawable/reload"
             android:visibility="gone"
@@ -48,12 +55,14 @@
 
         <ImageButton
             android:id="@+id/buttonChangeDisplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="31dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="8dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
             android:background="@color/trans"
             android:src="@drawable/device"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,9 +71,9 @@
 
     <ListView
         android:id="@+id/listDevices"
-        android:layout_width="0dp"
-        android:layout_height="614dp"
-        android:layout_marginTop="69dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

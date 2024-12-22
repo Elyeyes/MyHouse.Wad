@@ -44,6 +44,7 @@ class MenuFragment : Fragment() {
     }
 
     public fun changeDisplayMode() {
+        System.out.println("Night mode" + AppCompatDelegate.getDefaultNightMode())
         val switchIcon = requireActivity().findViewById<ImageButton>(R.id.buttonNDMode)
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
             System.out.println("Night mode")
@@ -78,11 +79,6 @@ class MenuFragment : Fragment() {
         if (responseCode == 200) {
             return
         }
-    }
-
-    private fun applyBackground(view: View) {
-        val background = BackgroundPreference.getBackground(requireContext())
-        view.rootView.setBackgroundResource(background)
     }
 
     public fun disconnectUser(view: View) {

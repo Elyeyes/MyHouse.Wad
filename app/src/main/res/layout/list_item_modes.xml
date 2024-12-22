@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,19 +9,20 @@
         android:id="@+id/textModeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/helvetica"
         android:text="TextView"
         android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageMode"
         app:layout_constraintStart_toEndOf="@+id/imageMode"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageMode" />
 
     <ImageView
         android:id="@+id/imageMode"
         android:layout_width="58dp"
         android:layout_height="53dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/mode" />
@@ -29,23 +31,24 @@
         android:id="@+id/ButtonApply"
         android:layout_width="80dp"
         android:layout_height="52dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
         android:backgroundTint="?attr/colorPrimary"
+        android:fontFamily="@font/helvetica"
         android:text="Apply"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageButtonRemove"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/textModeName"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonRemove"
+        app:layout_constraintTop_toTopOf="@+id/textModeName" />
 
     <ImageButton
         android:id="@+id/imageButtonRemove"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
         android:background="@color/trans"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ButtonApply"
+        app:layout_constraintBottom_toBottomOf="@+id/ButtonApply"
         app:srcCompat="@drawable/close" />
 
 

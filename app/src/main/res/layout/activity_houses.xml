@@ -15,24 +15,28 @@
 
         <ImageButton
             android:id="@+id/buttonDisconnect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
             android:background="@color/trans"
             android:onClick="disconnectUser"
             android:src="@drawable/quit"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/buttonReload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
             android:background="@color/trans"
             android:onClick="reload"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/reload" />
@@ -41,8 +45,11 @@
             android:id="@+id/textHouse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Houses"
+            android:fontFamily="@font/helvetica"
+            android:text="List of your Houses"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonReload"
             app:layout_constraintStart_toEndOf="@+id/buttonDisconnect"
             app:layout_constraintTop_toTopOf="parent" />
@@ -51,11 +58,12 @@
 
     <ListView
         android:id="@+id/listHouses"
-        android:layout_width="0dp"
-        android:layout_height="614dp"
-        android:layout_marginTop="69dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
