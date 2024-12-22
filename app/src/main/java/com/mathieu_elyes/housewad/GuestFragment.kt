@@ -12,6 +12,7 @@ import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mathieu_elyes.housewad.Adapter.GuestAdapter
 import com.mathieu_elyes.housewad.DataModel.GuestData
+import com.mathieu_elyes.housewad.Service.FragmentService
 import com.mathieu_elyes.housewad.Service.UserService
 
 class GuestFragment : Fragment() {
@@ -52,7 +53,7 @@ class GuestFragment : Fragment() {
     }
 
     private fun menu(view: View) {
-        ButtonHelper().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
+        FragmentService().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
     }

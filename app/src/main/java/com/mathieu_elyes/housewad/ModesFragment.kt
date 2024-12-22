@@ -10,6 +10,7 @@ import android.widget.ListView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mathieu_elyes.housewad.Adapter.ModeAdapter
 import com.mathieu_elyes.housewad.DataModel.ModeData
+import com.mathieu_elyes.housewad.Service.FragmentService
 
 class ModesFragment : Fragment() {
     private var modes: ArrayList<ModeData> = ArrayList()
@@ -37,7 +38,7 @@ class ModesFragment : Fragment() {
     }
 
     public fun menu(view: View) {
-        ButtonHelper().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
+        FragmentService().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
     }

@@ -13,7 +13,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class NavigationActivity : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
     private var isNavigationEnabled = true
-    @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
@@ -21,7 +20,7 @@ class NavigationActivity : AppCompatActivity() {
 //        rootView.setBackgroundResource(R.attr.background)
         replaceFragment(MenuFragment())
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        bottomNavigationView.setBackground(null)
+//        bottomNavigationView.setBackground(null)
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
         bottomNavigationView.setOnItemSelectedListener { item ->
             if (isNavigationEnabled) {

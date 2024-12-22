@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mathieu_elyes.housewad.Adapter.DeviceAdapter
 import com.mathieu_elyes.housewad.DataModel.DeviceListData
 import com.mathieu_elyes.housewad.Service.DeviceService
+import com.mathieu_elyes.housewad.Service.FragmentService
 import com.mathieu_elyes.housewad.Service.HouseService
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -54,7 +55,7 @@ class DevicesFragment : Fragment() {
     }
 
     public fun menu() {
-        ButtonHelper().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
+        FragmentService().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
     }

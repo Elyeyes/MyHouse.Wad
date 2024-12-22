@@ -11,7 +11,6 @@ import com.mathieu_elyes.housewad.DataModel.HouseData
 import com.mathieu_elyes.housewad.Storage.HouseIdStorage
 import com.mathieu_elyes.housewad.NavigationActivity
 import com.mathieu_elyes.housewad.R
-import com.mathieu_elyes.housewad.Service.HouseService
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 

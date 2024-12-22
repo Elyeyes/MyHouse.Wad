@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
     private fun loginSuccess(responseCode: Int, tokenResponse: TokenResponseData?)
     {
         val token = tokenResponse?.token.toString()
-        System.out.println("mon token: " + token)
         if (responseCode == 200)
         {
             mainScope.launch {

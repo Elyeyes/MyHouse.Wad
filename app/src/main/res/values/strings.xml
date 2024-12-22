@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">HouseWad</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="ListofyourHouses">List of your Houses</string>
     <string name="House">House</string>
     <string name="Owner">Owner</string>

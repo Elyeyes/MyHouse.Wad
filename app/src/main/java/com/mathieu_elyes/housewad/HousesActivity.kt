@@ -3,18 +3,12 @@ package com.mathieu_elyes.housewad
 import android.os.Bundle
 import android.view.View
 import android.widget.ListView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.mathieu_elyes.housewad.Adapter.HouseAdapter
 import com.mathieu_elyes.housewad.DataModel.HouseData
-import com.mathieu_elyes.housewad.Service.Api
 import com.mathieu_elyes.housewad.Service.HouseService
 import com.mathieu_elyes.housewad.Service.UserService
-import com.mathieu_elyes.housewad.Storage.TokenStorage
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class HousesActivity : AppCompatActivity() {
