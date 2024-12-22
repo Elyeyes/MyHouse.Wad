@@ -44,7 +44,6 @@ class ModesFragment : Fragment(), ModeAdapter.ModeAdapterCallback{
         FragmentService().replaceFragment(MenuFragment(), requireActivity().supportFragmentManager, R.id.fragmentContainerView)
         val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setSelectedItemId(R.id.otherFragmentItem)
-
     }
 
     private fun initModesList(view: View){
@@ -59,6 +58,7 @@ class ModesFragment : Fragment(), ModeAdapter.ModeAdapterCallback{
             modes.add(mode)
         }else{
             ModeService(requireActivity()).saveMode(mode)
+            modes.add(mode)
         }
         modeAdapter.notifyDataSetChanged()
     }

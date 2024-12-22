@@ -46,6 +46,7 @@ class GuestFragment : Fragment() {
             if (guestName.text.toString() != "") {
                 addGuests(guestName.text.toString())
                 guestName.text.clear()
+                verify.text = ""
             }else{
                 verify.text = "Please enter a name"
             }
